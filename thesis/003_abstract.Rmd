@@ -1,0 +1,43 @@
+---
+output: pdf_document
+---
+
+```{=tex}
+\renewcommand\abstractname{\textsc{Abstract}}
+
+\begin{abstract}
+  
+  \normalsize
+  \singlespacing
+  
+\noindent This master thesis assesses the impact of a minimum wage policy established by Brazil’s federal government from 2003 to 2010 which saw major growth in the "floor" earnings of workers in the country, and how it affected employment and economic activity at Rio de Janeiro’s state capital –- a very diverse metropolitan region in terms of gender and race, and also highly unequal in income and wealth. Using a difference-in-differences design inspired by Derenoncourt et al (2021)’s specification utilising strongly and weakly impacted areas given income levels pre-treatment, this research finds that minimum wage growth had positive impacts on income and hiring of workers at small and medium companies in strongly treated regions, while not having detrimental impacts in non-white people hirings. And by using principal component and factor analysis to develop measures that can capture economic activity at the microlevel, this research finds that strongly treated areas were highly influential in entrepreneurial development within the city.
+
+  \vspace{0.5cm}
+  
+  \noindent \textbf{Keywords:} Brazil; Economic activity; Employment; Minimum wage; Regional economics; Rio de Janeiro.
+  
+  \vspace{0.5cm}
+
+  \noindent \textbf{JEL codes:} E24; J38; R11; R23.
+\end{abstract}
+
+\newpage
+\renewcommand\abstractname{\textsc{Resumo}}
+
+\begin{abstract}
+  \normalsize
+  \singlespacing
+  
+\noindent Esta dissertação avalia o impacto de uma política para o salário mínimo adotada pelo governo federal do Brasil entre 2003 e 2010, responsável pelo forte crescimento do "piso" salarial de trabalhadores no país, e como esta afetou emprego e atividade econômica na capital do Rio de Janeiro -- uma região metropolitana bastante diversificada em termos de gênero e raça, e também altamente desigual em renda e riqueza. Usando uma especificação "difference-in-differences" inspirada por Derenoncourt et al (2021), que determina regiões fortemente e fracamente tratadas tendo como base a renda destas regiões pré-tratamento, esta pesquisa revela que o crescimento do salário mínimo teve impacto positivo nos ganhos e na contratação de trabalhadores em pequenos e médios negócios em regiões fortemente tratadas, ao mesmo tempo que não influenciou de forma prejudicial o emprego de pessoas não-brancas. E utilizando análise de componentes e a análise fatorial para criar medidas que possam capturar atividade econômica no nível "micro", descobre-se que regiões fortemente tratadas foram altamente influenciais no desenvolvimento de empreendedorismo dentro da cidade.
+
+  \vspace{0.5cm}
+  
+  \noindent \textbf{Palavras-chave:} Brasil; Atividade econômica; Emprego; Salário mínimo; Economia regional; Rio de Janeiro.
+  
+  \vspace{0.5cm}
+
+  \noindent \textbf{Códigos JEL:} E24; J38; R11; R23.
+\end{abstract}
+
+\newpage
+```

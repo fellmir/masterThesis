@@ -1,0 +1,216 @@
+---
+output:   
+  bookdown::pdf_document2:
+    fig_caption: yes
+    number_sections: yes
+    toc: no
+bibliography: references.bib
+csl: chicago.csl
+fontsize: 12pt
+geometry:
+- top=3cm
+- bottom=3cm
+- left=3.5cm
+- right=2.5cm
+header-includes:
+- \usepackage{setspace}
+- \usepackage{ebgaramond}
+- \usepackage{ragged2e}
+- \usepackage{fancyhdr}
+- \usepackage{microtype}
+- \usepackage{chngcntr}
+- \usepackage{pdfpages}
+- \usepackage{booktabs}
+- \usepackage{graphicx}
+- \usepackage[justification = centering, tableposition = top, font = small]{caption}
+- \usepackage[position = top]{subfig}
+- \usepackage{float}
+- \usepackage{multirow}
+- \usepackage{pdflscape}
+- \usepackage{longtable}
+- \usepackage{geometry}
+- \usepackage{array}
+- \usepackage{rotating}
+- \usepackage[hyphenbreaks]{breakurl}
+- \usepackage[hyphens]{url}
+- \captionsetup[subfigure]{font = scriptsize, labelfont = scriptsize}
+indent: no
+# reference-section-title: References
+nocite: |
+  @arrow; @base; @bigrquery; @broom; @Cairo; @data.table; @dbplyr; @devtools; @did; @didimputation; @DRDID; @duckdb; @e1071; @fastDummies; @fixest; @forcats; @glue; @googleComputeEngineR; @janitor; @knitr; @magick; @magrittr; @missMethods; @modelsummary; @pander; @parallel; @png; @psych; @purrr; @ranger; @RcmdrMisc; @readxl; @rmarkdown; @shiny; @stargazer; @stringr; @summarytools; @tibble; @tictoc; @tidyverse; @tinytex; @bookdown
+# nocite: null
+lang: en-US
+link-citations: yes
+---
+
+<!-- Remover tudo menos os resultados dos chunks -->
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo=FALSE, error=FALSE, warning=FALSE, message=FALSE)
+```
+
+<!-- Capa -->
+
+\includepdf[pages=1-4]{001_cover.pdf}
+
+<!-- Parágrafos e espaçamento -->
+
+```{=tex}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.1cm}
+\onehalfspacing
+\justifying
+\pagenumbering{roman}
+```
+<!-- Acknowledgements -->
+
+# Acknowledgements {.unlisted .unnumbered}
+
+```{r child = '002_acknowledgements.Rmd'}
+```
+
+<!-- Resumo -->
+
+```{r child = '003_abstract.Rmd'}
+```
+
+<!-- Sumário -->
+
+```{=tex}
+\tableofcontents
+\newpage
+```
+<!-- Lista de figuras -->
+
+```{=tex}
+\listoffigures
+\newpage
+```
+<!-- Lista de tabelas -->
+
+```{=tex}
+\listoftables
+\newpage
+```
+<!-- Cabeçalhos - Geral -->
+
+```{=tex}
+\pagestyle{fancy}
+\setlength\headheight{15pt}
+\fancyhead[L]{}
+\fancyhead[R]{}
+```
+\pagenumbering{arabic}
+
+# Introduction
+
+<!--- Cabeçalho--->
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Introduction}
+```
+```{r child = '004_introduction.Rmd'}
+```
+
+# Literature review
+
+<!-- Cabeçalho -->
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Literature review}
+```
+```{r child = '005_literature_review.Rmd'}
+```
+
+# The minimum wage policy in Brazil
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{The minimum wage policy in Brazil}
+```
+```{r child = '006_mw_policy.Rmd'}
+```
+
+# Regional economic activity in Rio de Janeiro
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Regional economic activity in Rio de Janeiro}
+```
+```{r child = '007_regional_economic_activity.Rmd'}
+```
+
+# Assessing Rio de Janeiro's socioeconomic evolution from 2000 to 2015
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Assessing Rio de Janeiro's socioeconomic evolution from 2000 to 2015}
+```
+```{r child = '008_assessing_the_link.Rmd'}
+```
+
+# Econometric analysis of minimum wage effects in regional economic activity
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Econometric analysis of minimum wage effects in regional economic activity}
+```
+```{r child = '009_econometrics.Rmd'}
+```
+
+# Conclusion
+
+<!--- Cabeçalho--->
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Conclusion}
+```
+```{r child = '010_conclusion.Rmd'}
+```
+
+# Appendix {.unnumbered}
+
+<!-- Appendix -->
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Appendix}
+```
+```{r child = '011_appendix.Rmd'}
+```
+
+# References {.unnumbered}
+
+<!-- Parágrafos e espaçamento (referências) --->
+
+```{=tex}
+\pagestyle{plain}
+\small
+\singlespacing
+\setlength{\parindent}{0cm}
+```
+
+\sloppy
+
+::: {#refs}
+:::
+
+\newpage
+
+# Annex {.unnumbered}
+
+<!-- Annex -->
+
+```{=tex}
+\thispagestyle{plain}
+\fancyhead[C]{Annex}
+```
+```{r child = '012_annex.Rmd'}
+```
+
+\newpage
+
+\includepdf[pages=1]{013_backcover_annex_impar.pdf}

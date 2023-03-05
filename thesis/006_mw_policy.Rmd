@@ -1,0 +1,41 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+Minimum wage laws date back to 1894, starting in New Zealand and followed two years after by the Victoria state in Australia. Progress in minimum wage laws worldwide would only kickstart 15 years later, with the United Kingdom's implementation of said regulation and the start of minimum wage support targeting especially vulnerable populace -- i.e., women -- in the United States [@internationallabourorganization2015].
+
+In Brazil, minimum wage laws were first established in 1936, with a 1940 decree-law on Workers' Day defining and implementing wages throughout the country. Given Brazil's variance in terms of economic development across its regions, minimum wages were initially established across 50 sub-regions, with 14 different values across them [@advfn2018].
+
+Minimum wage in Brazil has always been susceptible to the country's momentum, facing period of either strong growth, stagnation or strong devaluing conditioning on GDP swings and political alignment. The 1970s saw Brazil experience their "economic miracle" of high GDP growth, averaging 8.8% per year. However, minimum wage stagnated and represented a true loss of purchasing power to workers. Whereas during the 1980s, in Brazil's worst ever economic period with stagflation, the minimum wage fell to near-record lows from R\$ 985 in 1982, to R\$ 468 in 1990 [@institutodepesquisaeconomicaaplicada2022a].
+
+## From Plano Real to today
+
+Stagflation made monetary policy the main focus of Brazil's economic guidance in the 1980s and early 1990s. The country's currency underwent several reforms during this time period, with five different currencies taking over from 1984 to 1994 to address hyperinflation.
+
+Plano Real's implementation in 1994, transitioning from Cruzeiro Real to a dollar-parity Unidade Real de Valor, and then to a free exchange currency in the Brazilian Real, was the success required to wrest Brazil back to a path of low-inflation economic growth. Inflation fell from 2,075% in 1994 to an all-time low of 3.195% in 1998, with average GDP growth of 2.98% between 1994 and 2000.
+
+Despite strong economic growth, minimum wage lagged behind in the first years post-Plano Real implementation. The 29.8% growth between 1994 and 2002, under the presidency of Fernando Henrique Cardoso, was likely motivated by fears of a wage-price spiral that was identified as one of the main factors behind hyperinflation experienced during the 1980s and early 1990s [@lemos2004].
+
+Fernando Henrique Cardoso's successor, Luis Inácio Lula da Silva, had in the forefront a different distribution guidance from the federal government via minimum wage, while keeping monetary policy primacy established from his predecessor. Brazil managed to keep high GDP growth under Lula's government, averaging 4% growth per year. Whereas minimum wage increased by nearly 80% in the eight-year period with Lula as president, between 2003 and 2010.
+
+One of the presumed "boosts" to minimum wage law, was the establishment of an official adjustment rule in 2008 that would correct the earnings based on the previous year's inflation, and GDP growth two years prior. However, the end of Lula's government marked the end of Brazil's high economic performance, leading to a deep recession from 2014 to 2016 [@oreiro2017]. Ever since, Brazil's minimum wage is back to stagnation. Since 2011 until January 2022, minimum wage increased only 17.9% [@institutodepesquisaeconomicaaplicada2022a] [^3].
+
+[^3]: Minimum wage values can be found in page \pageref{tab:mw19702022}.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+  \centering
+  \caption{Real minimum wage in Brazil from 1970 to 2022 (in January 2022 R\$)}
+  \includegraphics[width=1\textwidth]{imgs/001_MW_1970-2022.png}
+  \label{fig:MW1}
+  
+  \vspace{0.1cm}
+  
+  \raggedright \tiny Available in: <http://www.ipeadata.gov.br/ExibeSerie.aspx?serid=37667>.
+    
+  \centering \footnotesize{Source: IPEA. Own elaboration.}
+\end{figure}
+```
+\newpage

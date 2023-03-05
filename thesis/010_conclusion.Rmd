@@ -1,0 +1,15 @@
+---
+output: pdf_document
+---
+
+This master thesis assesses how Brazil's minimum wage policy from 2003 to 2010, which saw major growth at the base level of earnings for workers in the country, affected economic outcomes of Rio de Janeiro's state capital workers, which live in a very diverse and highly unequal region.
+
+By using a difference-in-differences (DiD) design inspired by Derenoncourt et al (2021)'s specification utilising strongly and weakly impacted areas given income levels pre-treatment, this dissertation finds that minimum wage growth had a positive impact on earnings of workers in strongly treated regions of up to 27% for units treated over a 11-year span, while not having major negative impacts in hiring of non-white workers. It also boosted employment at small and medium enterprises (SMEs) at regions more susceptible to the impact of minimum wage growth policy.
+
+And by using principal component analysis (PCA) and factor analysis (FA) to capture economic activity development at the microlevel, this research finds that over time, strongly treated regions become entrepreneurial hubs thanks to small and medium enterprises that are created within them. This could be explained by the demand pull of workers who live in strongly treated regions, which are oftentimes "bedroom neighbourhoods", who seek to be provided with better commerce options closer to home.
+
+At the same time pensionists are very influential in Rio's city and metropolitan area on the demand side. This could be explained by the fact Rio still has a large influence of public workers in the city -- as also shown by PCA/FA -- with large pensions in comparison to the rest of the country. These pensions are often used as main income for several families, helping younger folks stay in school for better returns in education in the future.
+
+Further research on this subject would include more methodologies to assess robustness of these findings, as well as expanding the assessed regions (from the state's capital to the entire metropolitan area). The research design for both employment effects and economic activity could also be applied to different regions of Brazil such as São Paulo, Brasília and Fortaleza, which also allow for economic analysis at the neighbourhood level via the databases used in this dissertation.
+
+\newpage

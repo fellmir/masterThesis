@@ -1,0 +1,13 @@
+---
+output: pdf_document
+---
+
+First and foremost I would like to thank my mother, Sandra, my little brother, Ramon, and my family for the support throughout these years. I would not be able to be the first in the family to dream of becoming a master’s degree holder if it was not for the sacrifices you made as I grew up, just so I could have the best life you could afford. Nor would I have the assurance that if things go awry while I am more than 8,000km away from home, I have so many people to make sure I land safely no matter how hard nor where I fall. For that alone I am forever grateful.
+
+I would also like to thank my advisors, professor Vitor Ribeiro and Ph.D António Neto, for the extreme trust and support they gave me throughout this journey. Despite the “megalomania” of this project, they followed through and gave me guidance when I needed, as well as the belief that I could succeed in doing this. Thank you.
+
+Lastly, I would like to thank the friends I made – those who are still with me, and also those who came and went. Especially Camila, Renato and Inês, who have gone out of their way to welcome me into the country and make sure I can call it “home” one day in the future; and Pedro Mendes, for tireless discussions on data analytics, Economics, the world, and life in general as we traveled off the beaten path to fulfil dreams of our parents, getting to places we were not supposed to reach.
+
+Without all of you, I would not be here.
+
+\newpage

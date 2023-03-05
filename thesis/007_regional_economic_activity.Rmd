@@ -1,0 +1,147 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+## A brief history of Rio de Janeiro
+
+Rio de Janeiro was a region dominated by the Tupi populace since the beginning of the second millennium, with tamoios overtaking the location through much of its history before the arrival of Portugal to Brazil. One of the biggest "aldeias" in Rio was Carioca, which became the name given to the city's inhabitants [@carino2019].
+
+Guanabara Bay was discovered by the Portuguese in a 1502 expedition. But the city of Rio would only be founded in 1565, following several battles between Portuguese and French occupants of the bay, by Estácio de Sá. It thus became Brazil's second official city, 16 years after the foundation of São Vicente in São Paulo state.
+
+Rio de Janeiro quickly turned into a port city and thus an economic hub, initially focused on exporting sugar from cities in its surroundings that would later become neighbourhoods or cities that are now part of its Metropolitan Area. It was also the main administrative centre of Brazil's southern region, with Salvador being the country's "capital" and northern regional counterpart.
+
+The city became Brazil's second capital in 1763, after experiencing enormous growth from being a port city to the gold extracted from the mines in Minas Gerais state. It eventually surpassed Ouro Preto to become the country's biggest city in the late XVII century [@silva2015].
+
+Rio de Janeiro became capital to the Portuguese Empire from 1808 to 1815, during the royal family's departure from Portugal due to Napoleon Bonaparte's threat to the kingdom. The city continued to boom after Brazil's independence in 1822, this time thanks to coffee becoming a hot commodity throughout the world [@agenciaoglobo2017].
+
+However, as Rio de Janeiro grew, its neighbouring state went the opposite way. As a federal district, it enjoyed not just the attention and funds of federal government but also attracted some of the biggest talents in Brazil from the rest of the country. Whereas the rest of the state were mostly seen as places for extractive activities, with little to no institutional foundations to be found as Rio concentrated most of it.
+
+In the 1950s, president Juscelino Kubitchek decided to begin the construction of a new capital to Brazil -- Brasília -- in the Centre-West region of the country. This marked the beginning of Rio de Janeiro's fall from grace, with Brasília becoming the capital in 1960 and most of the federal buildings and offices moving to the new federal government centre.
+
+During Brazil's military dictatorship, from 1964 to 1985, Rio de Janeiro suffered with economic decline due to regional and national factors. The Guanabara federal district was dismantled and Rio de Janeiro became capital of the Rio de Janeiro state, which carried a lot of issues from its underdevelopment in previous centuries. At the same time large swaths of the population were forced out of the city centre to move to localities which would eventually develop into the "favelas" of today. These became "hotpots" of severe social problems that have marred the region ever since.
+
+The beginning of democratic regime in 1985 had Brazil in its worst economic stage, facing hyperinflation and recession since the late stages of the military dictatorship. Rio de Janeiro suffered a lot as well, with its decline furthered by the crisis [@hermann2014].
+
+Recovery started in the 1990s, with the Earth Summit held in 1992 at Rio representing its turnaround. The city invested in its cultural and touristic vocations, while the rest of the state got a boon from large oil reserves found at its coastal region, generating great amounts of royalties paid directly to the state government.
+
+Rio de Janeiro was the stage to several big events in sports, beginning with the Pan-American Games in 2007. It was also hosts to the World Cup finals in 2014, and the Olympics in 2016. However, Brazil's most recent economic crisis from 2014 to 2016 was once again a hard hit to Rio de Janeiro. That combined with severe changes in royalty distribution from oil extraction has put the state and its government back in decline, even though its population continues to grow [@agenciaoglobo2017].
+
+## The capital today
+
+Rio de Janeiro's state capital, which has the same name, had an estimated active economic population of 2.491 million in 2019. This represented 37.1% of its total population.
+
+According to the Pesquisa Nacional por Amostra de Domicílios (PNAD) in 2019, 54% of Rio de Janeiro's 6.719 million inhabitants were women. In terms of racial composition, 53% were white and 47% non-white.
+
+Latest unemployment numbers for the state of Rio de Janeiro, from PNAD's survey for 2021's last quarter, sets it at 14.2% - 3.1% above the national average for the same timeframe. Meanwhile average household income fell from R\$ 3,480 to 2,943 year-on-year, representing a 15.4% decrease [@institutobrasileirodegeografiaeestatistica2022b].
+
+In terms of economic composition, 67.13% of Rio de Janeiro's net gross regional product (GRP) of R\$ 271.8 billion in 2019 was generated via services excluding public ones. Public services were the second-most important activity in the capital, representing 19.75% of net GRP, followed by industry at 13.08%. Agriculture was the least relevant sector in Rio's economy, generating only 0.03% of its net GRP.
+
+GRP per capita in Rio de Janeiro was R\$ 52,833 in 2019, from R\$ 32,920 in 2010 -- a 60% increase over nine years. In the same time period, Rio's GRP grew 71% [@institutobrasileirodegeografiaeestatistica2022c].
+
+Another salient aspect of Brazil and especially Rio de Janeiro, is inequality. Whereas Brazil saw a 13.35% decrease in inequality during the 2000s, the capital's Gini index grew from 0.6092 in 1991 to 0.6150 in 2000, and 0.6391 in 2010 according to Census estimates for each year [@sistemaunicodesaude2011].
+
+```{=tex}
+\begin{table}[H]
+\centering
+\caption{Rio de Janeiro statistics from 2010 to 2021}
+\begin{tabular}{llcr} 
+\toprule
+\multicolumn{1}{c}{}                    &  & \textbf{ Time period } & \multicolumn{1}{c}{\textbf{ Value }}  \\ 
+\cline{3-4}
+Total population                        &  & 2019                   & 6.72 million                          \\
+Active economic population              &  & 2019                   & 2.49 million                          \\
+Men                                     &  & 2019                   & 46\%                                  \\
+Women                                   &  & 2019                   & 54\%                                  \\
+White                                   &  & 2019                   & 53\%                                  \\
+Non-white                               &  & 2019                   & 47\%                                  \\
+Unemployment (entire state)             &  & 2021.12                & 14.20\%                               \\
+Average household income (entire state) &  & 2021.12                & ~R\$~~~~~~~ 2,943                     \\
+Total net GRP (in R\$ bi)               &  & 2019                   & ~R\$~~~~~~~ 271.8                     \\
+Inequality (Gini)                       &  & 2010                   & 0.6391                                \\
+\bottomrule
+\end{tabular}
+\label{table:riostats01}
+
+\vspace{0.2cm}
+
+\centering\footnotesize{Source: IBGE. Own elaboration.}
+\end{table}
+```
+## Regional divisions of Rio
+
+Pereira Passos Institute ("Instituto Pereira Passos" -- IPP, in Portuguese) is a public research organization in Rio de Janeiro responsible with aiding the capital's prefecture in urban planning for public policies. Since 1979 it also produces and archives several reports and documents related to Rio's past and present [@institutomunicipaldeurbanismopereirapassos2022].
+
+In 1981, Rio de Janeiro underwent its last major change in geographical delimitations. The city was divided by 160 "bairros", i.e., neighbourhoods, 34 administrative regions and 5 Planning Areas ("Áreas de Planejamento" -- AP, in Portuguese). The latter encompassed popular city sections, which divided the locality by West, South, North, and Central Zones given environmental, historic, geographic and economic characteristics shared by the neighbourhoods in each of the Planning Areas. Jacarepaguá -- located in the West Zone of Rio -- was a special region, mostly due to Barra da Tijuca's late and "guided" developments as a neighbourhood [@prefeituradoriodejaneiro1981].
+
+A further subdivision of Rio de Janeiro in 2011 established Planning Regions ("Regiões de Planejamento" -- RP, in Portuguese), subdividing Planning Areas by similarities in neighbourhoods. There are now 16 of them, encompassing 162 neighbourhoods in Rio [@prefeituradoriodejaneiro2011].
+
+One of IPP's most recent developments was the creation of the Social Progress Index ("Índice de Progresso Social" -- IPS, in Portuguese). This index, with a 0-100 scale, evaluates differences in urban development per region by combining human development index indicators with public services provisions and human rights' ease of access divided between three major groups: Basic Human Needs, Welfare Foundations, and Opportunities [@2020].
+
+### Planning Area 1 -- Centro
+
+AP 1, Centro, consists of only RP, also named Centro (1.1), with 16 neighbourhoods and 6 administrative regions. Its projected population in 2018 was 307,102 people, representing 4.69% of Rio de Janeiro's entire population in that year.
+
+In 2020, average IPS in AP 1 was 53.65, with Portuária as the less developed administrative region (42.06) and Santa Teresa as the most developed counterpart (63.26). Overall, per capita earnings in Centro amounted to R\$ 28,204 per year.
+
+From 2000 to 2010, inequality as measured by the Gini index was up by 4.25% in the region, from 0.465 to 0.486. The leading contributor was São Cristóvão, with a 9.63% increase in inequality; and Santa Tereza moving in the opposite direction, with a 10.71% decrease[^4].
+
+[^4]: A list of Centro neigbourhoods can be found in page \pageref{tab:bairrosap1}.
+
+### Planning Area 2 -- Zona Sul e Grande Tijuca
+
+AP 2, Zona Sul and Grande Tijuca, is made by RP 2.1 -- Zona Sul -- and 2.2 -- Tijuca. It encompasses 25 neighbourhoods and 6 administrative regions, with 1.04 million (15.84%) residents in 2018.
+
+Average IPS in AP 2 was 73.53 in 2020, the highest in the city despite the presence of Rocinha (52.27), one of the largest "favelas" in Latin America, in the mix. Botafogo (85.03) leads the AP and the city in IPS score. It is thus no surprise that per capita earnings in the region are also the largest in the city, at R\$ 80,214 per year in 2018.
+
+Inequality in AP 2 went from 0.466 to 0.496 between 2000 and 2010, a 5.92% increase in the 10-year period. Tijuca saw the biggest increase in Gini index (10.72%), and Rocinha was the only region where inequality decreased (-3.88%)[^5].
+
+[^5]: A list of Zona Sul e Grande Tijuca neighbourhoods can be found in page \pageref{tab:bairrosap2}.
+
+### Planning Area 3 -- Zona Norte
+
+AP 3, Zona Norte, has seven different RPs: Ramos (3.1), Méier (3.2), Madureira (3.3), Inhaúma (3.4), Penha (3.5), Pavuna (3.6) and Ilha do Governador (3.7). These cover 81 neighbourhoods, in 13 administrative regions. The AP had a projected population of 2.84 million people in 2018, or 37.98% of the capital -- the most in the region.
+
+AP 3's average IPS in 2020 was 54.49 with Méier as the most developed administrative region (64.61), and Pavuna dead last (42.97). Per capita earnings in Zona Norte were at R\$ 25,633 in 2018.
+
+In AP 3, inequality as measured by the Gini index increased 0.74% between 2000 and 2010 -- from 0.455 to 0.458. Ilha do Governador saw inequality increase 15.14%, while Madureira had its Gini index decreased by 10.11%[^6].
+
+[^6]: Lists of Zona Norte neighbourhoods can be found in pages \pageref{tab:bairrosap3pt1}, \pageref{tab:bairrosap3pt2}, and \pageref{tab:bairrosap3pt3}.
+
+### Planning Area 4 -- Baixada de Jacarepaguá
+
+AP 4, Baixada de Jacarepaguá, has two RPs in Jacarepaguá (4.1) and Barra da Tijuca (4.2) with 19 neighbourhoods and three administrative regions. In 2018 AP 4 had 940,143 projected residents, or 14.37% of the city's total population.
+
+2020's average IPS in AP 4 was 59.83, with Barra da Tijuca (69.7) leading the charge. Cidade de Deus, another well-known "favela" in Rio de Janeiro, boasted the lowest score (47.84) in the region. And thanks to Barra, with per capita earnings of R\$ 84,849 per year -- more than double of Jacarepaguá's R\$ 33,373 -- AP 4 registered R\$ 50,036 p.c. earnings in 2018.
+
+The Gini index in AP 4 increased from 0.445 to 0.491 between 2000 and 2010, meaning a 9.36% surge -- the largest in the city. Barra da Tijuca's registered the largest inequality increase in the city -- 21.41% -- whereas Cidade de Deus saw the largest decrease in Rio de Janeiro (-11.44%)[^7].
+
+[^7]: A list of Baixada de Jacarepaguá neighbourhoods can be found in page \pageref{tab:bairrosap4}.
+
+### Planning Area 5 -- Zona Oeste
+
+AP 5, Zona Oeste, is made by the Bangu (5.1), Campo Grande (5.2), Santa Cruz (5.3) and Guaratiba (5.4) regions. It has 24 neighbourhoods covered by five administrative regions, with a population of 1.77 million (27.11%) according to 2018 projections.
+
+Average IPS in AP 5 was 52.13 in 2020, the lowest in the entire city. Guaratiba (43.54) was the worst performer, whereas Campo Grande (58.68) went in the opposite direction. In 2018 per capita earnings, AP 5 registered R\$ 19,816.
+
+AP 5 was the only region in Rio de Janeiro where inequality decreased overall between 2000 to 2010, from 0.469 to 0.464 (-0.98%). The largest decrease was registered in Santa Cruz (-10.73%), and the largest increase in Guaratiba (5.61%) [@institutomunicipaldeurbanismopereirapassos2019] [^8] [^9].
+
+[^8]: A list of Zona Oeste neighbourhoods can be found in page \pageref{tab:bairrosap5}.
+[^9]: Rio de Janeiro maps and graphs can be found from pages \pageref{fig:avgincomemap2010} to \pageref{fig:riopopproj2016}.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+  \centering
+  \caption{Map of Rio de Janeiro planning regions (RPs) and neighbourhoods}
+  \includegraphics[width=1\textwidth]{imgs/002_planning_regions_neighbourhoods.png}
+  \label{fig:rpsbairros01}
+  
+  \raggedright \tiny Available in <https://rioonwatch.org.br/?p=21068>.
+  
+  \vspace{0.1cm}
+    
+  \centering \footnotesize{Source: Rio On Watch.}
+\end{figure}
+```
+\newpage

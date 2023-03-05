@@ -1,0 +1,179 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+## Appendix A -- Econometric methodologies {.unnumbered}
+
+### Appendix A1 -- Difference-in-differences (DiD) {.unnumbered}
+
+A DiD estimator can be defined as first the difference within groups after and before treatment; and then the difference between the two groups, such as the equation below:
+
+$$
+\beta_\text{DiD} = [\bar Y^\text{treat,after} - \bar Y^\text{treat,before}]-[\bar Y^\text{control,after} - \bar Y^\text{control,before}]
+$$
+
+The four groups in the DiD estimator are:
+
+-   $\bar Y^\text{control,before}$ -- average outcome of control group before the experiment;
+
+-   $\bar Y^\text{control,after}$ -- average outcome of control group after the experiment;
+
+-   $\bar Y^\text{treat,before}$ -- average outcome of treatment group before the experiment;
+
+-   $\bar Y^\text{treat,after}$ -- average outcome of treatment group after the experiment.
+
+The general form of a DiD equation is:
+
+$$
+Y_{it}=\beta_0 + \beta_1 \text{after}_t + \beta_2 \text{treat}_i + \beta_3 (\text{treat} \times \text{after})_{it} + u_{it}
+$$
+
+-   Where: $\text{treat}_i$ is a dummy variable equal to 1, if the observation belongs to the treatment group;
+
+-   And $\text{after}_t$ is also a dummy variable equal to 1, if the observation takes place after the treatment.
+
+To work properly, DiD needs three basic assumptions:
+
+-   **Common time trend** (CTT), which is the basis as to why treatment and control groups would have evolved in the same way in the absence of treatment -- and also allows the DiD estimator to draw differences within and then between treatment and control groups;
+
+-   **Stable unit treatment value**, where observations in the control group are unaffected by assignment of treatment to the other observations -- meaning control group observations are independent from treatment, and generate no spill-over nor general equilibrium effects;
+
+-   And **no anticipatory effects**, whereby the treatment group cannot change their behaviour in anticipation of the treatment
+
+But since these can be too rigid -- especially the common time trend assumption -- one way to overcome limitations is to condition on covariates that make said assumption hold. Thus the estimation can take the form:
+
+$$
+\Delta Y_i = \beta_0 + \beta_1 X_i + \beta_2 W_{1i} + ... + \beta_{r+1} W_{ri} + u_i
+$$
+
+Where:
+
+-   $X_i$ is the set of covariates that can help conditioning CTT;
+
+-   And $W_{1i},...,W_{ri}$ is a set of regressors that allow checking and adjusting for conditional randomization, as well as improving overall efficiency of the estimation. [@cunningham2021].
+
+To reign in on CTT, a two-way fixed-effects (TWFE) is often utilised as a way to draw the average effect of the treatment on the treated (ATT), assuming said effect is constant due to non-heterogeneity across groups and over time. That however is also a very rigid assumption.
+
+An alternative that allows heterogeneity across groups and over time is to draw group-time average treatment effects instead, in which a treatment coefficient $\tau_{gt}$ would be allowed to vary. From this coefficient an average can be drawn to find the overall average treatment effect, $\tau$ , from the sum of the averages of group-time pairs $N_{gt}$ .
+
+Still, even the TWFE in its "static" form does not deliver consistent estimate for overall average treatment effect due to negative weighting from $\hat{\tau} \equiv \sum_{g, t} w_{g t} \hat{\tau}_{g t}$ . That is due to the weight of estimated treatment effects for each group-time pair, $w_{gt}$ , being often inconstant due to timing of treatment and/or heterogeneity across group and time [@borusyak2022; @dechaisemartin2020; @goodman-bacon2021; @sun2021].
+
+One way to further address heterogeneity issues, is to deploy dynamic/event-study estimations. These try to assess average treatment effect of being exposed for $k$ periods, but they also fail for the same aforementioned reasons [@sun2021].
+
+A solution to this issue provided by @gardner2021 and implemented by @butts2022 is to employ a robust two-stage difference-in-differences estimation, for both static and dynamic models. This estimation differs from the traditional TWFE by avoiding joint estimation of group and time effects, and ATT.
+
+The first step is to estimate a $y_{igt}=\delta_t+\delta_g+\varepsilon_{igt}$ model using only untreated/not-yet-treated observations to form $\tilde{y}_{igt}=y_{igt}-\delta_t-\delta_g$ , which is in practice the residuals of the former equation. The second step is to regress $\tilde{y}_{igt}$ on treatment status across all observations, which enables the researcher to find treatment effects either on static of dynamic form.
+
+Since standard errors from treatment will be incorrect due to $\tilde{y}_{igt}$ being an estimate itself, the estimator takes the form of a two-stage GMM estimator [@butts2022], for asymptotically correct standard errors. And covariates can be added as well, for same reasoning as above -- i.e, conditioning randomization of treatment and improving overall efficiency of the estimation [@butts2022; @borusyak2022; @gardner2021].
+
+### Appendix A2 -- Predictive mean matching (PMM) {.unnumbered}
+
+In PMM, estimation of missing entries takes values only within the range of observed data elsewhere, thus limiting the room for unrealistic or meaningless imputations. It also does not have an explicit model, reducing the chance of misspecification that arises from parametric estimation techniques [@buuren2018]
+
+One reason why PMM is so attractive, beyond its efficiency in estimating values [@young2017], is the possibility of combining the technique with MICE (Multivariate Imputation by Chained Equations) by using the "mice" package in R. In practice, MICE works similarly to a Markov chain Monte Carlo method/algorithm by processing
+
+$$
+\begin{gathered}
+P\left(Y_{1} \mid Y_{-1}, \theta_{1}\right) \\
+\vdots \\
+P\left(Y_{p} \mid Y_{-p}, \theta_{p}\right)
+\end{gathered}
+$$
+
+Where $Y$ is the complete data of a partially observed random sample, and $P\left(Y\mid\theta\right)$ is the $p$-variate multivariate distribution. The key is finding $\theta$, which is a vector of unknown parameters that completely specify the distribution of $Y$. By doing the iterative sampling of conditional distributions given by the expression above, MICE gets the posterior distribution of $\theta$ to impute missing values that will complete $Y$. This takes the form
+
+$$
+\begin{aligned}
+\theta_{1}^{*(t)} & \sim P\left(\theta_{1} \mid Y_{1}^{\mathrm{obs}}, Y_{2}^{(t-1)}, \ldots, Y_{p}^{(t-1)}\right) \\
+Y_{1}^{*(t)} & \sim P\left(Y_{1} \mid Y_{1}^{\mathrm{obs}}, Y_{2}^{(t-1)}, \ldots, Y_{p}^{(t-1)}, \theta_{1}^{*(t)}\right) \\
+& \vdots \\
+\theta_{p}^{*(t)} & \sim P\left(\theta_{p} \mid Y_{p}^{\mathrm{obs}}, Y_{1}^{(t)}, \ldots, Y_{p-1}^{(t)}\right) \\
+Y_{p}^{*(t)} & \sim P\left(Y_{p} \mid Y_{p}^{\mathrm{obs}}, Y_{1}^{(t)}, \ldots, Y_{p}^{(t)}, \theta_{p}^{*(t)}\right)
+\end{aligned}
+$$
+
+Where $Y_j^{\left(t\right)}=\left(Y_j^{obs},Y_j^{\ast\left(t\right)}\right)$ is the $j$-th imputed variable at iteration $t$. That way MICE converges quite fast to the real $Y$, given enough imputations and iterations with the data [@buuren2011].
+
+```{=tex}
+\vspace{0.5cm}
+\begin{figure}[H]
+\centering
+\caption{“mice” scheme when running three imputations at the same time}
+\includegraphics[width=0.8\textwidth]{imgs/029_mice_scheme.png }
+\label{fig:micescheme}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Buuren and Groothuis-Oudshoorn (2011)}
+\end{figure}
+```
+### Appendix A3 -- Principal component analysis (PCA) {.unnumbered}
+
+The key concept of PCA is the principal component (PC), which is a set of unit vectors (i.e., with length $= 1$) where each of these are in the direction of a best-of-fit line given the data that produced said component, all while being orthogonal to the vectors before them. This generates an orthonormal basis, where different individual dimensions of the data are linearly uncorrelated.
+
+Thus, for each $p$ variable in the analysis, a unit vector given the aforementioned principles is calculated and then added to a set which will be the PC. The process will generate as many PCs as there are variables to explain the entirety of variance that a dataset contains.
+
+Each PC, which share a common coordinating system thanks to a change of basis process, will be the weighted linear combination of variables used to produce them. They will all be uncorrelated and orthogonal to each other [@dutt2021].
+
+Usually, PCs are produced in an order of most variance explained. The first PC will explain the most variance in the dataset, the second one will be the most explanatory once variance assessed by the first is excluded, and so on until the $p$-th PC.
+
+Doing PCA starts with mean-centering, where variable averages are computed and then subtracted from the data so the coordinating system for each $n$-observation and $p$-variable shares a common origin point at zero. In practice, this is the standardisation of each analysed variable so issues with differences in range between them does not lead to biased results in the analysis. With standardisation, these variables are scaled to a form where they can be compared between one another.
+
+The formula for standardisation is quite simple, where:
+
+$$z=\frac{\text{ value - mean }}{\text{ standard deviation }}$$
+
+A covariance matrix is then drawn, just so we can check the variance of each variable in PCA and calculate eigenvectors and eigenvalues to identify principal components. Eigenvectors will indicate the direction in which most variance is found after a linear transformation in the variable(s) vector(s), becoming principal components per se. Whereas eigenvalues are scalar factors, or coefficients, that "stretches" eigenvectors the most -- in PCA, they indicate how much variance each eigenvector, or PC, carry.
+
+Therefore, eigenvectors in PCA point to where most information can be found in the $p$-dimensional system of variables. Meanwhile eigenvalues will help us rank PCs by order of variance, just by putting them on a decreasing scale.
+
+Finally, unit vectors will be found by normalizing the orthogonal eigenvectors. Via diagonal transformation of the covariance matrix, we can find "scores" which will give out the importance of each PC drawn in the PCA process. These "scores" can be seen as "feature vectors", or "summary indexes", that will be used to finalise the process either with dimensionality reduction, singular value decomposition, score plots, indexes, and/or many other forms of interpretation [@jaadi2021].
+
+Mathematically, there is a $A$ matrix with $n \times p$ dimensions, where $n$ are observations and $p$, variables of a data set. This matrix has been standardised so each column's sample mean is shifted to zero.
+
+For PCA, the $A$ matrix undergoes an orthogonal linear transformation where a set $m$ of $p$-dimensional vector weights, ${w}_{(k)}=\left(w_{1}, \ldots, w_{p}\right)_{(k)}$, will map each row vector $a_{(i)}$ from $A$ to create principal component scores, ${s}_{(i)}=\left(s_{1}, \ldots, s_{l}\right)_{(i)}$. This is done via
+
+$$s_{k(i)}= {a}_{(i)} \cdot {w}_{(k)}$$
+
+Where $i = 1, \ldots, n$ and $k = 1, \ldots, m$. This way, each score in $s_{k(i)}$ will take maximum variance from the $A$ matrix, with each ${w}_{(k)}$ weight being a unit vector -- or eigenvector.
+
+Drawing PCs is conditional on weight vectors. For the first PC, which carries the most variance from the $A$ matrix, the condition that needs to be fulfilled is
+
+$${w}_{(1)}=\arg \max _{\|{w}\|=1}\left\{\sum_{i}\left(t_{1}\right)_{(i)}^{2}\right\}=\arg \max _{\|{w}\|=1}\left\{\sum_{i}\left({a}_{(i)} \cdot {w}\right)^{2}\right\}$$
+
+In matrix form, this is equivalent to
+
+$${w}_{(1)}=\arg \max _{\|{w}\|=1}\left\{\|{A} {w}\|^{2}\right\}=\arg \max _{\|{w}\|=1}\left\{{w}^{\top} {A}^{\top} {A} {w}\right\}$$
+
+It can also be drawn as
+
+$${w}_{(1)}=\arg \max \left\{\frac{{w}^{\top} {A}^{\top} {A} {w}}{{w}^{\top} {w}}\right\}$$
+
+Since ${w}_{(k)}$ are unit vectors. Therefore,
+
+$$s_{1(i)} = a_{(i)} \cdot w_{(1)}$$
+
+Can be seen as a score for the first principal component. This can also be drawn as a vector in the original variables, in the form ${a_{(i)} \cdot w_{(1)}} w_{(1)}$.
+
+As for the other PCs, they are found when you subtract the first $k - 1$ PCs from $A$. This means
+
+$$\hat{{A}}_{k}={A}-\sum_{v=1}^{k-1} {A} {w}_{(v)} {w}_{(v)}^{\top}$$
+
+And
+
+$${w}_{(k)}=\underset{\|{w}\|=1}{\arg \max }\left\{\left\|\hat{{A}}_{k} {w}\right\|^{2}\right\}=\arg \max \left\{\frac{{w}^{\top} \hat{{A}}_{k}^{\top} \hat{{A}}_{k} {w}}{{w}^{T} {w}}\right\}$$
+
+To find the respective weight/unit vectors for each PC from $A$. Therefore,
+
+$$s_{k(i)} = a_{(i)} \cdot w_{(k)}$$
+
+Are scores for each PC found via linear transformation of $A$. And its full principal components' decomposition can be summed up as
+
+$$S = AW$$
+
+With $W$ as a matrix of weights whose columns are not just eigenvectors for the PCs, but that can also be utilised for "loadings" in PCA and factor analysis [@jolliffe2002].
+
+This entire process helps with addressing dimensionality issues. While it is quite useful to have millions of observations and dozens of variables for the task at hand, computation and even interpretation of such data can become problems if it is assessed under normal circumstances and with a limited amount of time. Methods such as PCA help with addressing the "curse of dimensionality" that comes from handling high-dimensional spaces in big data [@sohil2022].
+
+\newpage

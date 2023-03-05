@@ -1,0 +1,463 @@
+---
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: sentence
+bibliography: references.bib
+---
+
+As shown in the literature review, research on the link between minimum wage and regional economic activity is not extensive.
+Therefore, there are several reasons as to why research on the link between these two factors in Rio de Janeiro would be a good addition to the labour and regional economics fields.
+
+One reason is Rio de Janeiro's position as one of Latin America and the world's biggest metropolis.
+With 13.2 million inhabitants in its metropolitan area region and 6.8 million in the capital, as well as its position in Brazil's economy as a leading region in sectors such as tourism, media and public services, its economy could be compared to several countries worldwide.
+
+A second reason to motivate this research is Rio de Janeiro's inequality and diversity.
+The city composed by 165 neighbourhoods, 16 planning regions (APs) and 5 planning areas (RPs) with a wide range of socioeconomic conditions from access to public services to median wages, as well as 53% of non-white populace and 1.2 women/men ratio, could serve as a proper microscope to the country as a whole.
+
+Another source of motivation for the research is the availability of data for such analysis.
+While there is plenty of microlevel data for developed nations such as the United States and those within the European Union, Brazil is somewhat unique as a country outside of the realms of rich nations that also has publicly available data at the individual level, with well-defined geographical delimitations for big cities such as Rio de Janeiro.
+
+Finally, this research also goes beyond the go-to locations for this kind of research.
+Most research on minimum wage impacts in the past focused on United States and the European Union at the country and state levels, with lower geographical divisions taking over as time goes by [@dube2019].
+Here the objective is following the microregional analysis trend while applying it at one city, with potential of doing so in more Brazilian cities -- and beyond -- in the future.
+
+## Data
+
+Brazil is in a privileged position in comparison to countries of similar size and economic dynamism when it comes to publicly available data.
+Much of this is thanks to its statistics institute, Instituto Brasileiro de Geografia e Estatística (IBGE), created in 1936 but with its origins dating to the 19th century during Brazil's time as an empire [@guimaraes2022].
+
+IBGE regularly publicizes annual surveys such as Pesquisa Nacional por Amostra de Domicílios (PNAD), which focuses on job market and educational status at the individual level and access to public utilities and home appliances at the domicile level.
+It also calculates Brazil's official inflation index, Índice de Preços ao Consumidor Amplo (IPCA), since 1980 using cost of living for families in the countries' biggest metropolitan areas.
+
+IBGE's tradition of easily accessible data, including its Census -- done since 1940, on somewhat regular 10-year intervals -- tracks to the federal and regional level ministries and offices [@institutobrasileirodegeografiaeestatistica2013].
+One of the most utilized employer-employee databases in Brazil, Relatório Anual de Informações Sociais (RAIS), is collected and publicised yearly by Brazil's Ministry of Labour since the 1970s [@institutobrasileirodegeografiaeestatistica2022c].
+
+This open data "policy" has led to more and more works in the field of applied microeconomics and econometrics on Brazilian data.
+While most are still done with the country, Brazil has become a choice of analysis for papers by economists in the United States and beyond.
+
+### Databases
+
+For the upcoming descriptive statistics and data analysis, three databases were utilised.
+
+\vspace{0.1cm}
+
+**Relatório Anual de Informações Sociais (RAIS)**:
+
+The website Base dos Dados, maintained by a team of Brazilian researchers and lead by Ricardo Dahis, assistant professor of Economics at Pontifícia Universidade Católica do Rio de Janeiro, provides free access to RAIS and several other databases [@dahis2022].
+
+There are two types of RAIS databases, one called "vinculos" for workers and "estabelecimentos" for companies.
+At Base dos Dados, both databases were tidied according to tidy data principles popularised by statistician Hadley Wickham [@wickham2014] with a temporal coverage from 1985 to 2020.
+
+For this analysis, both RAIS databases were downloaded for the 2000--2015-year range.
+Analysis focused on the 2003-2014 interim, with most variables present and utilised.
+
+One important addition to the databases and to the task at hand, is the presence of a categorical variable for a workers' race since 2006.
+For previous years in the range of analysis where race was not present in the database, a combination of predictive mean matching (PMM) and multiple imputation by chained equations (MICE) methods was used to help determine which race a worker belonged to.
+
+\vspace{0.1cm}
+
+**Pesquisa Nacional por Amostra de Domicílios (PNAD)**:
+
+Base dos Dados also provides free access to PNAD, from 1981 to 2015.
+PNAD also has two different databases, for individuals ("pessoa") and domiciles ("domicilio").
+
+One difficulty from PNAD is the fact it does not have subregional delimitations similar to RAIS and Census, with the survey only informing whether observations were collected at the urban or rural area of a metropolitan area such as Rio de Janeiro.
+Given this research looks to draw results from minimum wage impact at the microlevel due different socioeconomic compositions of Rio de Janeiro neighbourhoods, using PNAD for such analysis is a difficult task.
+
+Nevertheless, data was collected from 2001 to 2015.
+One important detail is that data for 2000 and 2010 years is non-existent due to Census being held by IGBE during these two years.
+
+\vspace{0.1cm}
+
+**Censo Demográfico**:
+
+Once again, Base dos Dados is the data provider.
+It has Census data for two databases at the individual ("pessoa") and domicile ("domicilios") levels, from 1970 to 2010.
+
+Census and PNAD data can be seen as complementary, given that PNAD surveys often carry similar questions/variables and they are not held on Census years.
+However, Census is much wider in its scope, and it also includes geographical subdivisions for each observation *a la* RAIS.
+
+## Descriptive statistics
+
+One big motivation behind this research is the fact that growth in Brazil was not at all equal during its economic boom in the 2000s.
+At the time growth was much stronger in cities in the North and Northeast regions, which are also the poorest in the country.
+
+From 2000 to 2009 GDP in North and Northeast regions of the country grew by 219% and 199%, respectively, leading to both regions increasing their impact in Brazil's GDP. In the richest region, Southeast -- where Rio de Janeiro is located -- GDP grew by 160% during this timeframe while its overall economic impact diminished [@institutomauroborges2018].
+That was the case with Rio de Janeiro.
+From 2002 to 2013 the former Brazilian capital saw massive GDP growth, increasing by 201% [@institutobrasileirodegeografiaeestatistica2019].
+
+Thus given the positive impact of minimum wage growth on low-wage regions [@godoey2021] and Rio de Janeiro's inequality -- as well as the dynamics of wage inequality reduction in the country during the 2000s, with racial and gender heterogeneities as two potential explanatory factors of this mechanism [@derenoncourt2021a; @komatsu2016] --, it could be the case that one driver of the region's performance during the 2000s is similar to the minimum wage mechanism that drove wage inequality down in the rest of the country.
+
+### Census 2000 and 2010
+
+In Brazil, national Census surveys are done every 10 years since 1940 -- although its latest edition, which would have been done in 2020, was delayed due to the COVID-19 pandemic [@gaglioni2022].
+Still, it is one of the best ways to show how much has changed in the country over the years in several aspects, from ageing trends to socioeconomic conditions such as education and income.
+
+In both Census, most observations were taken from AP Zona Norte, with Zona Oeste following.
+The least populated region was Centro, which concentrates most companies and thus proper economic activity in Rio de Janeiro.
+
+At the RP level, there was a shift in individual interviews for the Census survey with Centro increasing by 62.6% in 10 years' time.
+Meanwhile Bangu and Guaratiba saw decreases of 25.5% and 63.2% each, in relation to their previous impact in Rio de Janeiro's observations.
+
+There are several ways in which the minimum wage growth policy in the 2000s might be shown to alter the populace's living standards at the lower quantiles of income and wealth in Rio de Janeiro.
+One illustrative way of doing so is the change of domiciles with a personal computer (PC).
+
+In the 2000 Census, it is quite clear that access to PCs in Rio de Janeiro is scarce despite it being one of Brazil's richest cities.
+Back then only 22.3% of households had a PC in the city.
+10 years later, nearly 60% of homes had the appliance -- a 165% increase.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{PC presence in Rio between 2000 and 2010}
+\includegraphics[width=1\textwidth]{imgs/003_pc_presence_2000_2010.png}
+\label{fig:censopc}    
+\vspace{0.1cm}
+\centering \footnotesize Source: IBGE. Own elaboration.
+\end{figure}
+```
+This also shows in income distribution across the city.
+In 2000, 21.3% of households were in the 0-2 minimum wage bracket of total income with most homes earning below the federal floor in all APs but Zona Sul e Grande Tijuca, where most households were in the 2-3 minimum wage bracket.
+However average income in households was 11.76 minimum wages, with a median of 6.00, which goes to show how unequally income was distributed within the city.
+
+In the 2010 Census, there is again noticeable improvement for households in the lower income brackets.
+The bracket "hump" shifts from the 0-2 income bracket to the 1-6 counterpart, with most households -- 42% of them -- now in the 1-4 division.
+
+Rio de Janeiro's socioeconomic fabric also changed markedly during the 2000s, as Census data shows.
+White/non-white makeup of Rio's populace went from 57.72-42.28 to 51.09-49.91 proportion between 2000 and 2010 in the entire city.
+Meanwhile the male population increased in the timeframe, from 47.63% to 49.34% of the city's demographic.
+
+Census survey also captured the change in Rio de Janeiro's age distribution.
+In 2000, 29% of the populace was below 18-years-old.
+10 years later, the curve "shifted" upwards with 19.6% of the population being underage.
+
+Mean and median ages in the 2000-2010 interval also illustrate how the population got older.
+In 2000 mean and median ages were 32.44 and 30 respectively, whereas in 2010 Census it "jumped" to 36.48 and 35.
+
+Decreases were registered in every range below 25-year-olds, with a 34.7% decrease in the 0-14 age bracket.
+Meanwhile every other age range increased, with the biggest ones in the 45-65 (+27.6%) and 76+ (+29.8%) brackets.
+
+Positive shifts in working age population, along with better economic conditions in the entire country and thus more working opportunities, lead to a noticeable increase in the economically active population within Rio de Janeiro.
+The proportion increased from 46.1% of working population in 2000, to 59.8% in 2010.
+
+Interestingly, there was a decrease in mean working hours per week between the Census surveys from 43.02 to 37.32, whereas the median remained at the legal limit of 40 hours as established by the country's Consolidation of Labour Laws (Consolidação das Leis do Trabalho, or CLT, in Portuguese).
+This mean decrease might be in part explained by an increase in internship recruitment, whose workload are limited to maximum 30 hours per week; and other assortments of working relationships, such as freelancing.
+
+In terms of individual income, movement from 2000 to 2010 could be seen as a concentration of workers suffering from losing earnings as the 0-2 bracket increased by 54.2% - with every other range decreasing in turn.
+This however would ignore the fact minimum wage increased by nearly 100% between surveys in real terms.
+
+Therefore, while mean and median wages per individual were R\$ 975 and R\$ 453 in 2000, respectively, these increased to R\$ 2,073 and R\$ 950 in 2010 -- almost following minimum wage growth trends.
+In minimum wage terms, there was a decrease from 6.46 to 4.1 in mean earnings by using such a parameter.
+
+Using minimum wage ranges to gauge how income distribution changed in each of Rio de Janeiro's APs, one can see the big impact it could have had in the entire location.
+But while the biggest increases in workers earning 0-3 minimum wages took place in Baixada de Jacarepaguá, Centro and Zona Sul e Grande Tijuca regions, every region registered similar changes.
+
+Demographic shifts in 10 years are bound to show up in educational levels, and this is what took place in Rio de Janeiro as well.
+The city saw a massive incline in groups of people completing secondary and tertiary degrees, with the latter increasing 69.3% from 9.1% to 15.4% in a 10-year span.
+Meanwhile people with less than primary education decreased by 29% in the same time period, to 38.1% from 53.7%[^10].
+
+[^10]: Descriptive statistics for Censo 2000 vs. Censo 2010 can be found in page \pageref{tab:censo20002010}.
+
+### PNAD, 2001 to 2015
+
+While the Census is held once every 10 years, PNAD is a continuous survey held every year in Brazil that is also very helpful in tracking the country's socioeconomic developments.
+One major caveat from PNAD to this research is the fact it does not have geographical subdivisions such as APs and RPs, which is the case for Census and RAIS.
+
+Another issue from PNAD is that it does not even distinguish cities within a metropolitan area such as Rio de Janeiro's.
+Rio's metro area is quite diverse, composed of 22 cities surrounding the state capital covering 7.5 million km2 and with almost 13.2 million inhabitants according to the latest IBGE estimates [@institutobrasileirodegeografiaeestatistica2022a].
+
+With this is mind, statistics were drawn from PNAD surveys only from Rio's metropolitan area and in urban areas, which means observations will be mostly taken from the state capital -- which is the focus of this research.
+
+Similar to Census, PNAD has data at the domicile and individual levels.
+Domicile data is quite helpful here to show how income has evolved over the years in Rio de Janeiro overall.
+In 2001, 60.4% of homes in Rio's metro area had a total income below R\$ 1,000.
+14 years later, 16.2% of domiciles were at this income level, meaning a 73.17% relative decrease in the interim.
+At the same time every other income bracket grew strongly.
+Most notable are increases at the R\$ 16,000-17,000 and beyond, with increases that surpass the 1,000% mark.
+Mean income at the domicile level in 2001 was R\$ 1,392, with a median of R\$ 800.
+It grew to R\$ 3,935 in 2015, at a R\$ 2,300 median -- increases of 182% and 187%, respectively.
+
+Another insight that PNAD can give into Rio's development, is the number of people living at a domicile.
+Year-on-year changes to occupation of a home can be indicative of how a country's quality of life has evolved, with fewer people living at a domicile helping denote not just better living conditions but also how the population has been able to find and maintain a roof above their head with little to no need of cost-sharing [@chimed-ochir2021; @zainal2012].
+
+Data here is quite telling in this regard, with 40% of Rio's population living at homes with 4 or more people in 2001.
+Whereas in 2015 this percentage fell to 27%, indicating a 32.5% decrease in 2015.
+Meanwhile, there was strong growth in homes with 3 or fewer individuals, with the most significant increase taking place in single-occupation domiciles -- from 13.1% to 19.5%, a 48.55% increase between 2001 and 2015.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{People per domicile in Rio between 2001 and 2015}
+\includegraphics[width=1\textwidth]{imgs/006_people_per_domicile_2001_2015.png}
+\label{fig:pnadppldom}    
+\vspace{0.1cm}
+\centering \footnotesize Source: IBGE. Own elaboration.
+\end{figure}
+```
+When looking at individual data from PNAD, it needs to be highlighted again that Rio de Janeiro's metro area is quite diverse.
+Therefore, numbers can be skewed given the sample pool from which observations are being drawn, which will include not just the capital but also cities with very different socioeconomic conditions such as Niterói, which has the state's best socioeconomic indicators; and Japeri, which is in the exact opposite spectrum [@casafluminense2020].
+
+In terms of racial composition, Rio's metropolitan area followed the capital trend.
+The white population in the region fell 25.5% percent between 2001 and 2015, from 59.5% to 44.3%.
+Which means the non-white population grew proportionally, from 40.5% to 55.7%, thanks to an increase in black and brown people living in the metro area.
+Gender composition, however, was stable throughout.
+
+Educational level in Rio de Janeiro's metropolis also changed remarkably.
+In terms of last degree attended, which include students and graduates of said degree, only secondary, tertiary and post-tertiary education frequencies grew between 2001 and 2015 to 60.6% from 34.5% - a 75.61% increase.
+Counting only tertiary and post-tertiary education, numbers are just as impressive with 20.9% studying or graduating at these levels in 2015, from 13.1% in 2001.
+
+Years of studying complement the picture, showing how many have graduated from secondary degrees and beyond.
+In this regard, 26% of survey respondents had studied 11 years or more back in 2001.
+14 years later, 43.6% had done so, meaning a 67.7% increase in this time period.
+
+Analysing mean and median statistics of years of studying help completing what has been described here.
+Mean years of studying in 2015 was 8 years, the median being the same.
+Back in 2001 the mean was 6.2 years, with a 6-year median.
+
+In terms of age, Rio de Janeiro's metro area got older between 2001 and 2015.
+Population below 34 years of age fell to 47% from 55.8%, a 15.8% decline.
+On the opposite spectrum there was 20% growth of people aged 34+, with strongest growth in elders from 87 and above (+62.5% from 2001 to 2015).
+
+Back in 2001, PNAD registered mean and median ages of 32.32 and 30 years, respectively, among interviewees for the survey.
+In 2015 mean age was 37 years, and the median, 36 years.
+Interestingly, in Rio de Janeiro's metropolitan area working population was kept mostly stable according to PNAD data, which goes in the opposite direction of trends shown by Census when looking only at the state capital.
+Working populace did grow to 50.4% in 2015 from 48% in 2001.
+
+Among workers, there were some interesting changes in terms of worked hours per week.
+There was a 169.3% increase in piecemeal work, also colloquially known as "bicos", where workers can only find casual jobs at 10 hours of occupation or less -- from 2.4% in 2001, to 6.4% in 2015.
+At the same time, there were increases in worked hours at the 20-40 range, which are within the legal limits set by CLT for internships and full-time jobs -- to 53.3% from 41.8%, between 2001 and 2015.
+
+A significant number of workers back in 2001 worked between 40 and 60 hours per week back in 2001, making up 44.1% of the working population in Rio's metro area.
+In 2015 this section of the populace fell to 32.5%, meaning a 26.4% decrease.
+
+Mean worked hours in 2001 were 42.7, with a 40-hour median.
+While the median stayed the same in 2015, mean worked hours fell to 38.32.
+
+Before moving to the last variable of interest in PNAD, changes in Social Security contribution should also be highlighted.
+Brazil's labour market is stratified by formal and informal contractual relationships, with the former under CLT laws which come with a plethora of obligations to the employer.
+While hiring workers without a formal contract is an illegal practice, loose regulation makes it commonplace in the entire country.
+
+Most papers analysing Brazil's labour market evolution during the 2000s indicate there has not been a loss of welfare to workers in informal relationships, when measured by wages obtained in their jobs and/or moving from formal to informal work spots [@boeri2011; @derenoncourt2021a; @engbom2021; @komatsu2016].
+
+PNAD helps backing these findings.
+In 2001, 67.2% of the working population in Rio's metro area were under CLT labour laws -- also known as "carteira assinada", in Portuguese.
+The number increased by 13.1% in 2015, to 75.9%.
+
+It is only natural that contributions to Social Security, which is tied to having a "carteira assinada", would increase in turn from 60.4% to 68.6% between 2001 and 2015, with a 13.7% growth.
+The 7.3% absolute gap between CLT workers and INSS contributions could be explained by workers in internships, who do not contribute to Social Security; and those in alternative labour relationships which are still legal under labour law such as independent/freelance workers who are companies themselves.
+
+Last but not least, changes in income at the individual level pretty much track the domicile-level trends explained above.
+People earning less than R\$ 1,000 were 81% of Rio's metro area population in 2001, and 39.5% of the PNAD sampling in 2015 -- a 51.2% decrease in 14 years.
+Individuals earning R\$ 1,000 to R\$ 6,000 became 54.6% of the populace in 2015, compared to 18% 14 years before.
+
+On average, PNAD interviewees in Rio de Janeiro's metropolis earned R\$ 817.65 with a R\$ 420 median in 2001.
+14 years later, mean income grew to R\$ 2280, with median income also increasing, to R\$ 1,270[^11].
+
+[^11]: Descriptive statistics for PNAD 2001 vs. PNAD 2015 can be found in page \pageref{tab:pnad20012015}.
+
+### RAIS, 2003 to 2014
+
+RAIS is an employer-employee linked database, whose data is filled every year by employers of millions of companies all around Brazil.
+It contains detailed information on several aspects of business such as the company's number of contracted employees, geographical location and market; and the same for workers, including level of education, time of employment, race and gender.
+
+Plenty of research using RAIS databases focuses on state-by-state or city-by-city comparisons.
+Here the focus is on effects of the minimum wage in Rio de Janeiro's state capital only, which is facilitated by the fact RAIS uses neighbourhood classifications which are similar to Census' data.
+Therefore, the city can be divided by APs and RPs, and the presence of heterogeneous effects on city-wide treatment effects such as minimum wage growth can be assessed as well.
+
+In 2003 the AP with most companies was Zona Sul e Grande Tijuca, with 28.1% of the city's enterprises.
+Zona Oeste was on the opposite spectrum with only 9.2% of companies opened and registered to Brazil's official systems.
+
+While Zona Sul e Grande Tijuca still lead the chart in this regard 11 years later, the city's outlook did change a bit.
+Baixada de Jacarepaguá saw strong growth since 2003, jumping 48.3% from 12.2% to 18.4% of Rio de Janeiro companies located in the region.
+Zona Oeste also grew in number of companies installed in the AP, to 10.2% - meaning 13.2% growth between 2003 and 2014.
+
+Looking at the RP level, things get a bit more interesting -- and telling.
+One can see that the reason behind Baixada de Jacarepaguá's growth was both Barra da Tijuca and Jacarepaguá RPs doubling the number of companies installed in these locations.
+With that Barra da Tijuca became the city's third-largest RP in companies installed with 11.4% representation in 2014, overtaking Tijuca RP.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Companies per AP in Rio between 2003 and 2014}
+\includegraphics[width=0.8\textwidth]{imgs/009_companies_AP_2003_2004.png}
+\label{fig:raiscompapfreq}
+
+\vspace{0.1cm}
+
+\centering \footnotesize Source: Ministério do Trabalho e Previdência. Own elaboration.
+\end{figure}
+```
+In terms of legal nature, most companies in Rio de Janeiro are limited companies ("sociedade limitada" in Portuguese) which grew from 141,726 to 150,777 enterprises between 2003 and 2014 -- a 6.3% increase.
+
+It is also interesting looking at companies opting for the "Simples Nacional" tax regime.
+This is limited to micro and small enterprises which employ up to 49 people, providing incentives to those who opt into the program [@governofederaldobrasil2022; @receitafederal2007].
+
+While 41.9% of companies in Rio de Janeiro were "Simples Nacional" opt-ins in 2014, in comparison to 42.3% in 2003, the number of companies in the regime jumped to 115,496 from 90,959 in this time frame.
+Most of them are in the city's poorest regions, Zona Norte and Zona Oeste, which are the two APS that have over 50% of companies choosing to opt into "Simples Nacional" in 2003 and 2014.
+
+Micro companies and SMEs are the ones listed the most in Rio de Janeiro's data from RAIS over the years.
+They represent at least 97% of companies in the city between 2003 and 2014 -- although several of them are those which employ zero people, meaning they are either freelancing/professional liberal office operations and/or companies whose operations were over during the year.
+These companies hiring no people whatsoever but still active in the economy, represent at least 51.6% of the RAIS "estabelecimentos" sample between 2003 and 2014.
+However, the kind of enterprise which grew the most in Rio are those which employed 1,000+ people, by 90% from 2003 (135 companies) to 2014 (257).
+
+When looking at workers in the payroll, the statistic is also heavily slanted towards micro and SME companies.
+More than 93% of firms in Rio employ fewer than 50 people, something that does not change between 2003 and 2014.
+
+The aforementioned trends mostly track to CLT employees.
+But such is not really the case with statutory workers.
+These are public service employees which are a significant part of Rio de Janeiro's economy, due to the city's legacy as a former federal capital.
+As exposed previously, public administration work represents 19.75% of Rio's GRP in 2019 [@institutobrasileirodegeografiaeestatistica2019].
+
+This kind of employment has seen a lot of change in terms of firm size.
+Back in 2003 firms with 0 to 10 statutory workers were the largest group in the city, with 46.1% of representation throughout.
+This fell to 11.7% in 2014, meaning a 74.6% decrease.
+
+In 2014, the most representative group are firms with 100 to 200 statutory employees, with 15.9% of the city's share.
+Meanwhile there are two "companies" -- the state and the municipal governments -- employing 70,000 to 100,000 people since 2003.
+
+Another thing of note is how the city's business kept open throughout the years.
+From 2005, which is the first year where the active business indicator is available, 82.5% of companies listed in RAIS "estabelecimentos" were active during that period.
+This fell to 79.7% in 2014.
+
+Companies in Baixada de Jacarepaguá were the most successful ones in this regard during the timeframe, with 82% of them kept open in 2014.
+The least favourable regions were Zona Oeste (77.2% in 2014) and Centro (77.6% in 2014).
+
+On average, companies in 2003 had 8.23 active workers in their payroll.
+In 2014 the mean jumped to 9.63.
+CLT links increased from 6.35 to 7.89; and statutory employment decreased, although slightly, to 1.74 from 1.88 between 2003 and 2014.
+
+At the AP level, Centro is the region with most employees per enterprise with an 18.1 average in 2014, from 14.2 in 2003.
+On the opposite side of the spectrum is Zona Sul e Grande Tijuca, with a 6.6 average which sets them behind Baixada de Jacarepaguá and Zona Oeste -- both of which overtook the former in terms of employees on payroll per company[^12].
+
+[^12]: Descriptive statistics for RAIS "estabelecimentos" 2003 vs. 2014 can be found in page \pageref{tab:raisestab20032014}.
+
+The last findings to be discussed in this section are about the research's main database, RAIS "vínculos" -- or RAIS at the workers' level.
+This is a database with over 38 million observations across 12 years, for workers in Rio de Janeiro's state capital only.
+
+As the main economic hub in Rio de Janeiro, the Centro AP had the biggest slice of work contracts in the city throughout the period assessed in this research.
+The share declined however, from 37.3% to 34% between 2003 and 2014, as Baixada de Jacarepaguá (15.3% in 2014, from 9.6% in 2003) and Zona Oeste (8%, from 6.5% in 2003) saw massive growth in their participation in Rio's labour market.
+
+Baixada de Jacarepaguá and Zona Oeste's growth is even more impressive in absolute numbers.
+The former went from 219,002 to 582,676 workers, meaning a 170% increase in 11 years.
+Meanwhile Zona Oeste got to 304,340 workers in the region from 146,754 in 2003, with a 107.6% rate of growth ever since.
+
+At the RP level Guaratiba's growth was a stalwart, as the least economically relevant region in the city grew 382.3% in terms of workers at the location, from 3,182 in 2003 to 15,346 in 2014.
+Just as impressive were the increases in Jacarepaguá, Santa Cruz and Barra da Tijuca RPs, with up to 34% increases in the state capital's labour market participation; and more than 140% growth in number of workers at these regions.
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Work contracts per AP in Rio, between 2003 and 2014}
+\includegraphics[width=0.8\textwidth]{imgs/011_workers_AP_2003_2014.png}
+\label{fig:raisworkcontap}
+
+\vspace{0.1cm}
+
+\centering \footnotesize Source: Ministério do Trabalho e Previdência. Own elaboration.
+\end{figure}
+```
+The racial outlook in Rio de Janeiro's labour market did replicate trends shown in Census and PNAD.
+From the first available year in which race is coded, 2006, white workers represented 58.7% of the city's share.
+This decreased by 15.2% until 2014, when the share fell to 49.8%.
+
+The AP outlook in racial terms shows how changes were drastic, specially in the Zona Norte and Zona Oeste regions.
+White workers represented 54% of the labour force in both regions back in 2003.
+Their representation fell to 47.5% in Zona Oeste, and 43.9% in Zona Norte over the next 11 years.
+Meanwhile regions such as Zona Sul e Grande Tijuca, with 62.2% of its workers being white in 2003, saw this share fall by 15.2% in 2014 to 52.7%.
+
+Such demographic changes could be explained by big increases in non-white labour market presence throughout the city when looked at the AP level.
+Non-white worker's participation increased by 112.8% between 2003 and 2014 in Zona Oeste, and by 116.5% in Baixada de Jacarepaguá in this time frame.
+
+The gender outlook, however, did not change much throughout the years.
+Female participation did increase by 5.6% between 2003 and 2014, from 39.7% to 41.9% citywide.
+At the AP level, every region but Zona Norte saw growth in female labour market participation between 40.4% in Baixada de Jacarepaguá, and 44.5% in Zona Sul e Grande Tijuca.
+In Zona Norte female labour market presence fell to 39.1% from 40.5% in the 2003-2014 interval.
+
+Until 2005, RAIS did not distinguish levels of tertiary education between bachelor's, master's and doctorate degrees.
+These were all bunched into tertiary degrees, which were the second-most representative group in the city at 19.3% in 2005, only behind secondary degree holders at 38%.
+
+From 2006, when master and doctorate degrees began being distinguished, the share of tertiary degree holders fell to 16.8%.
+But it increased again to 21.7% in 2014, representing a 28.9% increase ever since at the city level.
+However secondary degree holders still lead the charts with 47.7% of the labour market's share.
+
+When it comes to AP, trends are quite similar.
+Secondary, tertiary and post-tertiary degrees all increased in labour market presence, both in relative and absolute numbers.
+In all APs holders of secondary degrees in the respective labour markets grew by at least 24% with strong increases in Zona Norte (+62.1%) and Zona Oeste (+50.5%) from 2003 to 2014.
+In the meantime Baixada de Jacarepaguá saw the strongest relative increase in tertiary and post-tertiary workers, from 11.9% to 14.9% -- a 25% "jump".
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Education of workers in Rio between 2003 and 2014}
+\includegraphics[width=0.8\textwidth]{imgs/012_education_2003_2014.png}
+\label{fig:raiseduc}
+
+\vspace{0.1cm}
+
+\centering \footnotesize Source: Ministério do Trabalho e Previdência. Own elaboration.
+\end{figure}
+```
+Age in Rio's labour market shows some interesting trends.
+Groups with the strongest increases in participation and absolute numbers over the 2003-2014 period were workers between 15 and 17 years of age, and 50+ workers.
+Every other age group but 30-39 years olds saw decreases in labour market share, although this group is still the most representative in the entire city.
+
+However mean and median ages in the city's labour environment remained largely stable.
+Mean age in the labour market increased to 36.7 from 36.1 years in 2014, whereas median age remained at 35 years in the 2003-2014 interim.
+
+Most workers in Rio work either in limited or closed capital companies, which hired between 61.4% and 65.7% of workers in the city.
+As for company size, most workers in Rio de Janeiro between 2003 and 2014 were at enterprises hiring more than 1,000 people with 25 to 29.9% of the city's labour market share.
+Employment at this level increased by 83.8% from 2003 to 2014, with hiring in companies between 20 and 99 workers growing by at least 81.5%.
+
+One interesting trend in type of hiring in Rio's capital is the fall in first employment hires in terms of labour market participation.
+This kind of hiring represented 4.4% of hires in the city back in 2003, and it fell to 3.4% in 2014.
+In the meantime, transfers without costs of workers between companies grew from 2% to 3.3%; and rehires also increased, to 27.3% in 2014 from 21.7% in 2003.
+
+The most common employment relationship in RAIS falls under CLT, representing at least 76% of hires in the city since 2003.
+The second-most representative group are statutory workers, although its share fell to 12.6% in 2014 from 17.4% 11 years before -- a 27.5% decrease.
+
+As mentioned in previous sections for the Census and PNAD surveys, most workers in Rio are hired at the maximum law limit of 44 hours of work per week.
+Their participation in the labour market remained largely stable, from 63.9% to 68.1% between 2003 and 2014 in the state capital.
+
+However, the two contracts which grew the most in a 11-year span were 16-20 and 31-40 weekly hour hirings.
+The former increased by 198% city-wide, and the latter by 101.7% in absolute numbers over the 2003-2014 time frame.
+One thing of note in the AP-level analysis is that Centro has more workers under 31-40 hours per week than 41-44 hours.
+This is largely explained by statutory workers whose hours are limited to 40 every week.
+
+There have been some interesting trends in hirings and firings in Rio de Janeiro in monthly terms over the years.
+Peak hiring and firing months changed markedly over the years, with the only consistent trend being December as the month with the least hires between 2003 and 2014.
+
+Average income for workers in Rio de Janeiro, when assessed by minimum wage earnings, show large relative increases in the 0-2 minimum wage groups.
+Every other group saw a decrease between 2003 and 2014, which might be explained by new entrants in the labour market and also strong minimum wage growth itself in the assessed time period outpacing wage adjustment for workers.
+
+In every AP region but Centro, workers earning between 1 and 3 minimum wages represent over 71.1% of the labour market in 2014.
+Zona Oeste has the largest share of such group at 82.4%, and Centro has the lowest at 53.2%.
+
+In 2003 mean wages were R\$ 1,188 in absolute terms, and 5.2 minimum wages at a median of R\$ 593 and 2.6 MWs.
+11 years later mean wages increased to R\$ 2,688 city-wide, with a median of R\$ 1,378.
+However, earnings measured by the minimum wage fell to 3.7 on average, at a 1.9 median.
+
+And looking only at December earnings, the scenario is not too different.
+There were similar trends across city-wide and AP-level workers, and also in mean and median wages earned during the 2003-2014 interim.
+
+Back in 2003 18.6% of workers were at their jobs for more than 10 years in Rio.
+This fell to 13.3% in 2014, which is a 28.4% decline in the time frame.
+Meanwhile workers with less than 3 months at a job became the most significant "slice" of the labour market, representing 16.4% of workers in 2014 from 12.7% in 2003.
+
+Mean employment time in 2003 was 66.2 months, with a 25.8 median city-wide.
+11 years later the mean fell to 53.2 months, at a 17.9 median.
+
+At the city level in 2003, 73.8% of workers kept their job at the end of the year.
+This fell by 10% over the years, to 66.5% in 2014.
+At the AP level, Centro was the "safest" region for workers at 73.3% of them keeping their job by the end of the year in 2014, in comparison to 75.9% in 2003 -- something that could be explained by the number of statutory/public service workers in the region[^13] [^14].
+
+[^13]: Descriptive statistics for RAIS "vínculos" 2003 vs. 2014 can be found in page \pageref{tab:raisvinc20032014}.
+
+[^14]: Further descriptive analysis visualizations can be found from pages \pageref{fig:censoworkpop} to \pageref{fig:raisvincativ}.
+
+\newpage

@@ -1,0 +1,32 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+Brazil is a very diverse and highly unequal country which experienced major gross domestic product growth from 2000 until 2013, increasing by nearly 57% in this period [@theworldbank2021]. During the same period, the federal government implemented a minimum wage growth policy that raised it from US\$ 2,410 to US\$ 4,883 per year in constant 2020 USD PPP prices [@organisationforeconomicco-operationanddevelopment2021], representing a 102.6% increase between 2000 and 2013.
+
+But GDP growth in Brazil was not equally distributed across the country. In the 2000s, growth was stronger especially in cities in the North and Northeast regions, which are also the poorest in the country [@villela2013]. Even in its richest region, the Southeast, GDP growth was not uniform as Minas Gerais and Espírito Santo recorded stronger growth than the two leading economies in the country, São Paulo and Rio de Janeiro [@institutomauroborges2018].
+
+That was the case with Rio de Janeiro's metropolitan area. As a very diverse and highly unequal region [@casafluminense2020], the former Brazilian capital saw massive GDP growth during the 2002-2013 timeframe, increasing by 201% [@institutobrasileirodegeografiaeestatistica2019].
+
+Given the positive impact of minimum wage growth on low-wage regions [@godoey2021] and Rio de Janeiro's inequality -- as well as the dynamics of wage inequality reduction in the country during the 2000s, with racial and gender heterogeneities as two explanatory factors of this mechanism [@derenoncourt2021a; @komatsu2016] --, it could be the case that one driver of the region's performance during the 2003-2013 period is similar to the minimum wage mechanism that drove wage inequality down in the rest of the country.
+
+Thus, the main question in this research is whether the minimum wage, and so minimum wage growth policy from the federal level, can have a differential and discernible impact in local economic activity -- with heterogeneity as a potential driver of such effects.
+
+And so, this master thesis sought to find whether the minimum wage growth policy implemented in Brazil had an effect in local economic activity, and labour market outcomes of the populace. Given Rio de Janeiro's diversity, there could be differential effects of minimum wage growth depending on whether a location had more potential to be affected by the policy given its previous income level, due to its populational composition. This differential effect, caused by heterogeneities in Rio's populace in income, gender and race, could be a factor in explaining employment effects and economic performance in certain regions of the city.
+
+With help from publicly available data for the research, this master thesis looks first at how the city of Rio de Janeiro and its surrounding metropolitan area developed in socioeconomic terms from 2000 to 2015 using Census, PNAD (*Pesquisa Nacional por Amostra de Domicílios*) and RAIS (*Relação Anual de Informações Sociais*) data. It then assesses the effects of minimum wage increases from federal government at the microlevel using RAIS, as an employer-employee linked database, on an array of variables that can help address how impactful this policy was for Rio de Janeiro's labour market with a difference-in-differences (DiD) design based on strongly and weakly treated regions.
+
+Minimum wage impacts are also addressed via principal component analysis (PCA) and factor analysis (FA), using RAIS and PNAD datasets. And to complete missing entries within these databases, this research utilizes predictive mean matching (PMM) combined with multivariate imputation by chained equations (MICE) to infer them.
+
+In DiD analysis, we find that minimum wage growth had a positive impact on earnings of workers in strongly treated regions, while not having major negative impacts in hiring of both female and non-white workers. It also boosted employment at "Simples Nacional" firms, which are small and medium enterprises (SMEs) at a more favourable tax regime [@governofederaldobrasil2022; @receitafederal2007].
+
+Whereas in PCA/FA analysis, we find that strongly treated regions were highly impactful in entrepreneurship within the city. At the same time the city and its metro area also had a fair share of economic influence on the demand side from pensionists, as shown by PNAD data.
+
+With this, this master thesis contributes to the literature of two fields: regional economics and labour economics. On the former, the dissertation identifies factors that can capture economic activity at the microlevel, to assess potential differential effects stemming from public policies, socioeconomic composition of the local economy, and other characteristics that can be important in defining the performance of a region.
+
+On the latter, it adds to the ongoing research on minimum wage heterogenous effects, gauging how minimum wage impacts workers at the microlevel in Brazil; as well as general effects of minimum wage growth at the microlevel, with a focus on more vulnerable regions and minority groups, to identify whether there are any differential effects from such policy in populace and regions.
+
+This master thesis proceeds as follows. Section 2 describes the literature review, covering works on minimum wage effects at national and regional levels, and economic activity indexes. Sections 3 and 4 provide context on Brazil's minimum wage policy at the federal level, as well as Rio de Janeiro's past and current economic development. Section 5 utilises several databases to describe the city's demographic and economic evolution at the domicile and individual levels. Section 6 assesses minimum wage effects on employment and economic activities. Section 7 concludes.
+
+\newpage

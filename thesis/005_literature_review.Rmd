@@ -1,0 +1,66 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+## Minimum wage and its effects
+
+The literature on minimum wage growth effects has been recently highlighted by the Nobel prize awarded in 2021 to economist David Card, involved in the empirical study of the effects of minimum wage increase in two bordering United States' states on low-wage employment [@card1994]. The results of this research, finding a positive effect on employment from a minimum wage hike, ran counter to general labour market theory, and gave credence to labour market models with frictions where minimum wage growth can have a positive impact on employment [@boadway2001; @lang1998].
+
+Ever since, minimum wage effects on employment have become one of the most studied subjects in labour economics, as employment often works as a proxy for social welfare of a populace, and economic activity. A literature review by @dube2019, covering 55 studies on the link between minimum wage and employment in various countries -- but mainly the United States and the United Kingdom -- revealed a "muted effect" of the former on the latter, all while increasing earnings of low-paid workers.
+
+This wealth in research of minimum wage effects on employment also functions to highlight not just different impact of the minimum wage in geographical terms, but also how methodology matters in assessing such effects. As per @dube2010, using local identification instead of broader geographical measures in assessing minimum wage impacts leads to the aforementioned effects shown in the literature review.
+
+This can be showed by @paun2021 . By using fixed and random effects (FE & RE) estimation on country-level data, the authors identify adverse effects of minimum wage increases on employment levels of vulnerable groups in the European Union between 1999 and 2016. Meanwhile, a study by @ahlfeldt2018 with difference-in-differences (DiD) methods at the regional level in Germany is in line with Dube's findings in the United States, thanks to spatial wage convergence.
+
+But as posited by @manning2021, this "elusive" effect of the minimum wage on employment should not be a surprise to the field at this point in time. Therefore, in this realm of research there might be need to move on from finding the signal of minimum wage on employment, toward limits of minimum wage -- akin to @christl2019, finding a non-linear/inverted U-shaped relation between minimum wage and youth employment in 12 European Union countries between 1980 and 2011.
+
+In Brazil, literature on minimum wage effects is also vast. Much of this research has in mind the dual labour market in Brazil, with approximately 40% of its population in informal labour market relations in 2020 [@abdala2021].
+
+@meghir2015 models and empirically tests a dual labour market with frictions, using Brazilian data from 2002 to 2007. They find that increased regulation of informal workers does not have a detrimental impact on employment, while improving workers' welfare via better wages and labour rights' coverage.
+
+@boeri2011 uses FE and DiD specifications to show how minimum wage increases in Brazil have positive impacts on wages and educational attainment, shifting informal workers to formal labour relationships, even with the caveat of short-term adverse impact on employment. However, @jales2018 shows via regression discontinuity design (RDD) and nonparametric kernel estimations that these minimum wage increases led to more workers moving to the informal market, which also reduces payroll revenue to the government since these workers do not pay these taxes.
+
+Research on minimum wage effects in Brazil is also dedicated to assessing how it played an important role in diminishing the country's inequality, whose Gini index fell from 59.9 to 51.9 between 1996 and 2015 [@theworldbankdevelopmentresearchgroup2021]. @engbom2021 uses a series of specifications to test their modelling on minimum wage effects in affecting inequality. They show that minimum wage hikes had spillover effects up to the 90th percentile of income in Brazil, reducing inequality while having little adverse impact on employment thanks to workers moving to companies with high productivity.
+
+@hinojosa2019 's specification, using instrumental variables (IV), shows similar effects -- although the author also identifies larger positive impacts on formal workers. And @brito2017, using decomposition methods, shows that nearly 65% of the reduction in intra-household inequality in Brazil between 1995 and 2014 can be attributed to the minimum wage, especially via pensions.
+
+One important driver of this reduction in inequality in Brazil via minimum wage comes from racial dynamics. As highlighted by @derenoncourt2021a, the minimum wage increases in Brazil from 2000 to 2009 had a great impact in diminishing the earnings gap between whites and non-whites in the country, with no reallocation of workers from formal to informal labour relationships nor employment effects shown during this period.
+
+There can be a parallel drawn between this and @derenoncourt2021 work. Their research shows that legislation introduced in the United States expanding minimum wage coverage to several industries with African American workers in 1966, was one of the main drivers in the reduction of the racial earnings gap at least until the early 19080s.
+
+There is also plenty in the literature regarding minimum wage heterogeneities, with different effects found depending on geography and methodology utilized.
+
+@callaway2018 uses DiD with conditional quantile treatment effect on the treated to assess minimum wage effects on different gender, education and race groups in the United States. They find negative impacts on earnings for vulnerable groups such as low-educated women and African Americans. Whereas @braunstein2018, with research focused on Latin American countries between 1990 and 2010, finds a positive effect of higher minimum wages on female employment in the region.
+
+@dube2019a finds that higher minimum wages reduce poverty rate levels in the United States, especially for vulnerable groups. And @godoey2021 shows that minimum wage increases have higher positive impacts in low-income areas, without negative employment effects identified in the United States areas assessed during the 2005-2017 period covered by their research [^1].
+
+[^1]: Support tables for the literature on minimum wage effect can be found in pages \pageref{fig:mwemployment}, \pageref{fig:mwheterogeneities} , \pageref{fig:mwbrazil}, and \pageref{fig:mwgrowth}.
+
+## Economic activity indexes
+
+It is thus somewhat clear that minimum wage effects are not uniform, nor even linear, conditional on several factors. One promising way to assess such effects might be regional analysis, utilising economic activity indexes to capture these dynamics at the microlevel.
+
+The literature on local economic activity indexes is driven mainly by @stock1999, using time-series data and methods to create inflation forecasts for the United States that could serve an auxiliary function to the Phillips curve. The result is an index of nearly 170 measures that combined with the Phillips curve, outperforms most traditional methods of forecasting inflation.
+
+Their methodology was later developed by @crone2005 into coincident indexes for United States' states. By combining linear transformations and calibrations with the Kalman smoother, they are able to produce proper measures of ongoing economic activity in the regions analysed even in absence of gross state product (GSP).
+
+@vidal2017 also adapted Stock-Watson's index methodology, with Latin America in mind. They employ a three-step method to draw a coincident index for the Valle del Cauca region in Colombia, and they are able to decompose and assess which factors are most important in determining economic activity in the region.
+
+Outside of regional economic activity, there are also its proxies. @navarro2017 created a competitiveness index with over 60 variables, based on productive capital, human capital, and public capital, to find the best performing regions in Spain from 2001 to 2014. Whereas @amaral2010 used market potential, defined as the sum of internal and external incomes of a locality, to check how it affects wages of a region via spatial specification, random effects and IV.
+
+Still on assessments of regional economic activity and wages, @hacker2013 uses first-differenced vector autoregressive (DVAR) Granger causality approach to check whether concentration of population leads to economic growth, or vice-versa. Using Swedish regions between 1987 to 2006, they find a strong effect of population agglomeration leading to economic growth -- assessed by average rages of a region -- in urban setting, but not in rural ones.
+
+One somewhat unexpected finding in this review, is that there is not much in the literature trying to assess the direct link between minimum wage and GDP outside of macroeconomic modelling [@cahuc1996; @fanti2011; @rebitzer1995]. But there are proxies that might be able to highlight this relationship.
+
+In Brazil, @arestis2016 uses generalised method of moments (GMM) and vector error correction (VEC) to show how consumption, aided by wage income and therefore minimum wage increases, was a big driver of Brazil's economic growth before and after the 2008 financial crisis. Sectoral decomposition of gross value added (GVA) also finds that the minimum wage hikes in Brazil were the biggest determinant of individual labour income from 1996 to 2014, reigning above productivity [@katovich2018].
+
+Using proxies such as firm markup for economic activity, recent research using FE, IV and DiD was able to find a positive impact of minimum wages in China likely due to incentives on value-enhancing activities and efficient resource allocation [@du2020]. And in Indonesia, panel data and causality analysis unearthed a positive link from minimum wage to regional economic growth between 2003 and 2015 [@amri2018].
+
+For OECD countries, @askenazy2003 models and finds via ordinary least squares (OLS) analysis of 11 nations from 1970 to 1990 a positive link between economic growth and the Kaitz index -- the ratio of minimum wage to the average wage -- when combined with an increase in exports. And @jung2021, using autoregressive distributed lag (ARDL) methodology, estimates that a 1% increase in minimum wage led to nearly 0.5% increases in Canadian retail sales from 1991 to 2019.
+
+Therefore, the field is rich in potential to gauge whether minimum wage has effects on economic activity. There are proxies such as firm markups, employment and consumption that could work to examine such a link, with potential to create measures that combine them proxies into a proper score for analysis with an array of techniques such as principal component analysis (PCA) and factor analysis (FA) [@dai2021; @godshalk1988; @lai2003; @marques2001; @vyas2006] [^2].
+
+[^2]: Support tables for the literature on economic activity indexes can be found in page \pageref{fig:econindexes}
+
+\newpage

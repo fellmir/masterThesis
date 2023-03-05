@@ -1,0 +1,858 @@
+---
+output: pdf_document
+bibliography: references.bib
+---
+
+Richness in data, as shown by the previous chapter, will also allow a deep analysis into the economic trends of Rio de Janeiro's labour market and economy from the early 2000s until the mid-2010s. This is in track with ongoing developments in labour economics that entwined with regional economics, turns research outlooks from macro- to micro-level/granular analysis thanks to public access data throughout the world [@spanache2020; @newzealandgovernment2022; @dahis2022].
+
+For this research, there is a wide range of econometric tools that can be employed to assess effects of minimum wage growth at each of Rio de Janeiro's main regions over the years. A combination of difference-in-differences (DiD) methodology, which has been the go-to "instrument" for the field in the last few years, is the main candidate for any assessments.
+
+However, gaps in data from earlier years in the main databases for this assessment demand some kind of arrangement that could help avoid biased and "noisy" estimates paint a divergent picture form what this data really tells. This is where the aforementioned PMM-MICE (Predictive mean matching/Multivariate imputation by chained equations) methodology comes in.
+
+There is also a need to check not just how robust findings are from the combination of the two aforementioned methods, but also to help assess which components in the data influence economic activity the most -- or the least -- in Rio de Janeiro. For this purpose, principal component analysis (PCA) and factor analysis (FA) can be of great aid to this research [@dai2021; @godshalk1988; @lai2003; @marques2001; @vyas2006].
+
+## Methodologies
+
+Here is more detail on the econometric methodologies to be used in this research.
+
+\vspace{0.1cm}
+
+**Difference-in-differences (DiD)**:
+
+The major intuition behind DiD is comparing the change in outcome of a certain dependent variable in a treatment group, to the change in outcome of a control group. This way the method can help identify what would have happened to treated groups, had the intervention not occurred in the first place, thanks to a general, or common, time trend.
+
+It also means we assume that in absence of intervention, treatment and control groups would have evolved similarly -- something that can be assessed by using previous time periods to control for differences in environment that are not captured by randomisation [@columbiamailmanschoolofpublichealth2013; @mckenzie2020].
+
+In DiD, the identification setup work by defining expected outcomes given treatment and its absence. To draw out the changes in outcomes of treatment and control groups and estimate treatment effects, time and group-specific fixed effects are estimated as a way to best "isolate" the impact of a treatment in the sample. This gives a path to getting group-specific linear trends as well, from the DiD method [@callaway2022] [^15].
+
+[^15]: More details can be found in [Appendix A1 -- Difference-in-differences (DiD)]
+
+Treatment in this research is inspired by @derenoncourt2021a which utilises the concept of strongly and weakly treated regions to assess effects of public policy at the micro-level. Common measures to define said regions are average and median wages, as well as a conjunction of socioeconomic statistics that can help determine how "vulnerable" a region and its populace are to policies such as minimum wage growth over an extensive period of time.
+
+For this research, the chosen statistics to define strongly and weakly treated Rio de Janeiro APs and RPs are average, median and standard deviation of wages in the year 2000, using the RAIS "vínculos" database. We thus define strongly and weakly treated regions in Rio by looking at information pre-treatment -- i.e., strong minimum wage growth due to federal government policy.
+
+```{=tex}
+\begin{table}[H]
+\centering
+\caption{Average and median income of APs in Rio in 2000 (in R\$)}
+\resizebox{1\linewidth}{!}{%
+\begin{tabular}{llrrrrrr} 
+\toprule
+\multicolumn{1}{c}{} &  & \multicolumn{1}{c}{\textbf{City}} & \multicolumn{1}{c}{\textbf{Baixada de Jacarepagua}} & \multicolumn{1}{c}{\textbf{Centro}} & \multicolumn{1}{c}{\textbf{Zona Norte}} & \multicolumn{1}{c}{\textbf{Zona Oeste}} & \multicolumn{1}{c}{\textbf{Zona Sul e Grande Tijuca}}  \\ 
+\cline{3-8}
+Mean                 &  & 897.72                            & 703.32                                              & 1058.53                             & 699.72                                  & 601.89                                  & 864.47                                                 \\
+Std.Dev              &  & 1248.47                           & 1031.34                                             & 1407.95                             & 870.33                                  & 747.86                                  & 1272.35                                                \\
+Min                  &  & 0                                 & 0                                                   & 0                                   & 0                                       & 0                                       & 0                                                      \\
+Median               &  & 483.95                            & 390.2                                               & 598.16                              & 423.46                                  & 376.34                                  & 430.81                                                 \\
+Max                  &  & 18020.07                          & 17325                                               & 18020.07                            & 17910.54                                & 17538.83                                & 18000                                                  \\
+\bottomrule
+\end{tabular}
+}
+\label{table:apincome2000}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Ministério do Trabalho e Previdência. Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+\centering
+\caption{Average and median income of RPs in Rio in 2000 (in R\$)}
+\resizebox{0.8\linewidth}{!}{%
+\begin{tabular}{llrrrrrrr} 
+\toprule
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{\textbf{City}} & \multicolumn{1}{c}{\textbf{Bangu}}   & \multicolumn{1}{c}{\textbf{Barra da Tijuca}} & \multicolumn{1}{c}{\textbf{Campo Grande}} & \multicolumn{1}{c}{\textbf{Centro}}   & \multicolumn{1}{c}{\textbf{Guaratiba}} & \multicolumn{1}{c}{\textbf{Ilha do Governador}}  \\ 
+\cline{3-9}
+Mean                 &                      & 897.72                            & 552.36                               & 732.77                                       & 591.09                                    & 1058.53                               & 714.62                                 & 1028.41                                          \\
+Std.Dev              &                      & 1248.47                           & 694.25                               & 1112.2                                       & 699.64                                    & 1407.95                               & 1057.14                                & 1221.7                                           \\
+Min                  &                      & 0                                 & 0                                    & 0                                            & 0                                         & 0                                     & 0                                      & 0                                                \\
+Median               &                      & 483.95                            & 360.49                               & 384.25                                       & 377.47                                    & 598.16                                & 320.31                                 & 576.57                                           \\
+Max                  &                      & 18020.07                          & 16099.95                             & 17015.61                                     & 17538.83                                  & 18020.07                              & 12187.18                               & 16719.49                                         \\
+                     &                      &                                   &                                      &                                              &                                           &                                       &                                        &                                                  \\
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}              & \multicolumn{1}{c}{\textbf{Inhauma}} & \multicolumn{1}{c}{\textbf{Jacarepagua}}     & \multicolumn{1}{c}{\textbf{Madureira}}    & \multicolumn{1}{c}{\textbf{Meier}}    & \multicolumn{1}{c}{\textbf{Pavuna}}    & \multicolumn{1}{c}{\textbf{Penha}}               \\ 
+\cline{4-9}
+Mean                 &                      &                                   & 562.53                               & 661.81                                       & 749.2                                     & 598.48                                & 696.29                                 & 667.64                                           \\
+Std.Dev              &                      &                                   & 642.53                               & 903.52                                       & 832.04                                    & 798.17                                & 948.94                                 & 865.28                                           \\
+Min                  &                      &                                   & 0                                    & 0                                            & 0                                         & 0                                     & 0                                      & 0                                                \\
+Median               &                      &                                   & 400.33                               & 397.9                                        & 483.23                                    & 375.18                                & 426.39                                 & 413.51                                           \\
+Max                  &                      &                                   & 15062.73                             & 17325                                        & 16925.9                                   & 15653.91                              & 15456.8                                & 17910.54                                         \\
+                     &                      &                                   &                                      &                                              &                                           &                                       &                                        &                                                  \\
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}              & \multicolumn{1}{c}{\textbf{Ramos}}   & \multicolumn{1}{c}{\textbf{Santa Cruz}}      & \multicolumn{1}{c}{\textbf{Tijuca}}       & \multicolumn{1}{c}{\textbf{Zona Sul}} & \multicolumn{1}{c}{}                   & \multicolumn{1}{c}{}                             \\ 
+\cline{4-7}
+Mean                 &                      &                                   & 604.84                               & 730                                          & 756.93                                    & 918.57                                &                                        &                                                  \\
+Std.Dev              &                      &                                   & 719.17                               & 909.42                                       & 1057.32                                   & 1364.61                               &                                        &                                                  \\
+Min                  &                      &                                   & 0                                    & 0                                            & 0                                         & 0                                     &                                        &                                                  \\
+Median               &                      &                                   & 406.66                               & 414.34                                       & 393.58                                    & 455.2                                 &                                        &                                                  \\
+Max                  &                      &                                   & 14622.81                             & 16665.26                                     & 17785.13                                  & 18000                                 &                                        &                                                  \\
+\bottomrule
+\end{tabular}
+}
+\label{table:rpincome2000}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Ministério do Trabalho e Previdência. Own elaboration.}
+
+\end{table}
+```
+Therefore, these are the strongly and weakly treated APs in Rio:
+
+-   **Strongly treated**: Zona Norte (AP 3), Baixada de Jacarepaguá (AP 4) & Zona Oeste (AP 5);
+
+-   **Weakly treated**: Centro (AP 1) & Zona Sul e Grande Tijuca (AP 2).
+
+And these are the strongly and treated RPs in Rio, according to the aforementioned measures:
+
+-   **Strongly treated**: Bangu (RP 5.1), Campo Grande (RP 5.2), Guaratiba (R.P 5.4), Inhaúma (RP 3.4), Jacarepaguá (RP 4.1), Méier (RP 3.2), Pavuna (RP 3.6), Penha (RP 3.5), Ramos (RP 3.1), Santa Cruz (RP 5.3);
+
+-   **Weakly treated**: Barra da Tijuca (RP 4.2), Centro (RP 1.1), Ilha do Governador (RP 3.7), Madureira (RP 3.3), Tijuca (RP 2.2), Zona Sul (RP 2.1).
+
+\vspace{0.1cm}
+
+**Predictive mean matching (PMM)**:
+
+Although RAIS is a rich database, some of its years have gaps in variables that could be very important to this research. One of which is race, with every year of RAIS "vínculos" before 2006 missing data for observations in the dataset; as well as AP and RP, which are missing from RAIS "estabelecimentos" dataset in 2002.
+
+There are however several statistical techniques in which one can infer which value an observation can take based on forward or backward data, most of which based on maximum likelihood methods -- PMM being one of them.
+
+With PMM the intention is to impute missing entries of a database by drawing subsets of observations, which work as "candidates" to fill these values. "Candidates" are selected by checking whether the predicted value (of the missing value) are the closest in the entire database to the predicted value of the NA that will be imputed. Then a "donor" out of these candidates is selected at random, which will fill the missing value in the dataset [@buuren2018] [^16].
+
+[^16]: More details can be found in [Appendix A2 -- Predictive mean matching (PMM)]
+
+There are several alternative imputation methods that could be used over PMM. Considering how the aforementioned variables could be treated as categorical/discrete, one could use logistic regressions to evaluate and fill the missing values. These however proved to be too computational- -- and thus, time- -- demanding especially with AP and RP as variables with 5 and 16 values, respectively. There was also the potential and risk of running into several issues in case model parametrization was done incorrectly (e.g., in case the relationship between the missing value/estimate and the regressors were non-linear) [@nooraee2018].
+
+Another alternative was the utilization of "random forests", a well-known data mining and machine learning technique which helps selecting "decision trees", created in a process of estimating and predicting values either in discrete (classification) or continuous (regression) form, to reduce variance of these "trees" to improve their overall performance [@ho1995] . While the random forest method does not run into the parametrization issues of a logistic regression technique, it was also very computational- and time-consuming. At the same time there is no consensus on whether it is a better performing technique than either logistic regressions or PMM [@young2017; @hapfelmeier2014].
+
+Thus, PMM was selected thanks to being roughly efficient, not running into parametrization issues and being the best in terms of computational processing and time spent on assessing values. The latter helped in fully utilizing the tools made available by the mice ("Multivariate Imputation by Chained Equations") package for the programming software R, which combines imputation techniques with multiple imputations and iterations of this technique to infer a missing value in the database [@buuren2011].
+
+\vspace{0.1cm}
+
+**Principal component analysis (PCA)**:
+
+While there are several variables in the databases utilised in this research that can be good indicators of economic activity measure on their own, there are several methodologies that allow investigators to combine these variables and a set of controls to draw a general and easily interpretable picture of whatever analysis is being made.
+
+In economics, indexes are the most common way to draw this. However, there are limitations to applying indexing methods to the databases at hand starting with the fact they do not have monthly or quarterly data. While there are ways in which these can be inferred and transformed into time series data to produce indexes, this can produce too much noise especially if variables are highly correlated, and the methodology utilised does not account for endogeneity and similar issues.
+
+A good alternative to generating economic activity measures with the kind of data available, is using PCA. Here these measures can be produced for city-wide activity over the years assessed, combining several variables to produce "scores" which can help identify better performing years and/or regions with the databases at hand.
+
+One issue is the potential loss of accuracy in doing this process, compared to traditional estimation methods for indexing. However, the dimensionality issues which can be solved by the method as highlighted above, and the ease of interpretation from the output which can in turn provide better information to researchers, can certainly compensate any accuracy loss from applying PCA to a dataset [^17].
+
+[^17]: More details can be found in [Appendix A3 -- Principal component analysis (PCA)]
+
+Thus, with PCA, the aforementioned "indexes" can be turned into "summary scores" for a number of purposes in this research given the wealth of data available, as well as potentially valuable variables that could paint this picture [@dai2021; @lai2003; @marques2001; @vyas2006] . An alternative that proved valuable in easing statistical interpretation further was factor analysis (FA), which uses PCA principles to help seeing the "link" between principal components and the variables that compose them over the years for RAIS and PNAD databases [@godshalk1988; @blackman1973; @chateau2012].
+
+## Sample
+
+To assess economic effects of our variables of interest via DiD, specifically with the RAIS "vínculos" database, sample will be restricted to workers between 23 and 65 years of age -- i.e., those who have just left college to workers about to enter retirement. For PNAD, the sample was restricted to respondents over the age of 23. In terms of racial breakdown, workers have been grouped between white and non-white as per @gerard2021 .
+
+As mentioned before, treatment will be based on strongly and weakly treated regions based on average, median and standard deviation of wages in the year 2000, using the RAIS "vínculos" database. DiD will be applied on RAIS data between 2001 and 2013, alongside PMM-MICE to help infer race of workers pre-2006 and beyond.
+
+RAIS will also be helpful in PCA determination for economic activity in each Rio region. In this, we use data not just from RAIS "vínculos" but also from RAIS "estabelecimentos", which has a wealth of information on companies at the city over the years.
+
+PNAD is also useful for PCA, as a "check" on economic effects of the minimum wage across not just the Rio de Janeiro state capital, but the metropolitan area in its entirety. Given it also covers people out of the labour market who still earn income via pensions, it can be helpful in revealing what might be lost in an outlook that focus just on companies and workers in the city -- as is the case with RAIS.
+
+## Variables of interest and controls
+
+For the RAIS database, which is the main database for this research, there are many potential variables of interest for the purposes of this work. But given time and space constraints, it is best to focus on those who could be the most telling in terms of minimum wage economic impact at the regional level, using Rio de Janeiro's labour market as a laboratory for such. Among those, we will assess:
+
+-   "**vinculo_ativo_3112**", which indicates whether a worker has kept their job at the end of the year. This could function as a measure of how much minimum wage growth influenced in entrance/exit flows in Rio's labour market over the assessed time period;
+
+-   "**indicador_simples**", to check whether minimum wage increases affected how many workers have been employed by SME's under the "Simples Nacional" tax regime;
+
+-   "**avg_income_defl**", in log form since it is an income measure, to gauge minimum wage growth impact on the salaries of Rio de Janeiro workers;
+
+-   "**gender_id**" and "**race_id**", which identify whether a worker is female or non-white, to measure if minimum wage growth affected their employment levels;
+
+-   And "**q1_id**", a dummy variable that indicates someone earning below two minimum wages, which can help assess if there were any changes in the hiring of workers at the aforementioned income level.
+
+The equation form for treatment effect estimations of "**vinculo_ativo_3112**", "**indicador_simples**", and other binary dependent variables, will be
+
+```{=tex}
+\begin{equation}
+1\left\{\text { vinculo\_ativo\_3112 }_{i s t}\right\}=\delta_{k}+\sum_{k} \beta_{k} \text { Strongly }_{s} \times \delta_{t+k}+X_{i s t}^{\prime} \Gamma+\delta_{s}+\varepsilon_{i s t}
+\end{equation}
+```
+Where:
+
+-   $\delta_{k}$ is the accumulated time fixed effect;
+
+-   $\sum_{k} \beta_{k} \text { Strongly }_{s} \times \delta_{t+k}$ is the accumulated effect of minimum wage increases over time in strongly treated regions of Rio -- with $\beta_{k}$ as our coefficient of interest;
+
+-   $X_{i s t}^{\prime} \Gamma$ are a set of control variables;
+
+-   $\delta_{s}$ are regional fixed effects;
+
+-   And $\varepsilon_{i s t}$ is the residual.
+
+Whereas the equation for "**avg_income_defl**", given the log transformation of the variable, will be
+
+```{=tex}
+\begin{equation}
+\log \text { avg\_income\_defl }{ }_{i s t}=\delta_{k}+\sum_{k} \beta_{k} \text { Strongly }_{s} \times \delta_{t+k}+X_{i s t}^{\prime} \Gamma+\delta_{s}+\varepsilon_{i s t}
+\end{equation}
+```
+For the above, the R package deflateBR, which allows deflating of values based on Brazil's inflation indexes such as IPCA, was used [@deflateBR]. The chosen index was IBGE's IPCA, the main inflation measure utilised for wage adjustments, with January 2022 as the reference month [^18].
+
+[^18]: Deflators can be found in page \pageref{tab:ipcadeflators20002015}
+
+Datasets from RAIS "vínculos" pre-2006 do not have one of the potential controls that could be used to this research, which is race. There is also missing data for AP and RP variables in both RAIS "estabelecimentos" and "vínculos" databases.
+
+To solve this issue, we use PMM -- as described above -- to infer the racial composition of city workers, as well as fill AP and RP missing values from the databases at hand.
+
+Programming software R has a package called "mice", which stands for "Multivariate Imputation by Chained Equations", which combines an array of methods and Markov chain Monte Carlo-like algorithms for imputation of missing values [@buuren2011]. The package also selects the best variables for the process, guaranteeing an acceptable success rate in filling NAs for the variables of interest in both RAIS databases.
+
+PCA has the advantage of being flexible enough that it can be applied across a range of databases not just to create the aforementioned economic activity scores/factors, but also to gauge how impactful some of the variables available in each dataset is to paint the socioeconomic "picture" of Rio de Janeiro over the 2000s and 2010s. Still the main objective here is to use PCA to draw measures of economic activity in Rio over the years, using RAIS "vínculos" and "estabelecimentos", as well as PNAD, for that.
+
+A PCA factor decomposition using RAIS "vínculos" to assess economic activity in each Rio de Janeiro AP and RP will include:
+
+-   "**avg_income_defl**";
+
+-   "**vinculo_ativo_3112**";
+
+-   "**tempo_emprego**", which is time at employment of a certain worker;
+
+-   "**quantidade_horas_contratadas**", meaning how many hours a worker has been hired for;
+
+-   "**idade**", which is the age of a worker;
+
+-   "**tamanho_estabelecimento**", for the company's size in which the worker is currently employed;
+
+-   "**race_id**";
+
+-   "**educ_id**", which denotes how further in education a worker has gone into before taking his job;
+
+-   "**gender_id**";
+
+-   "**treat_AP**" and "**treat_RP**", to identify workers at regions that were strongly treated by the minimum wage hikes from 2003 to 2010
+
+-   "**public_work**", a dummy that denotes whether a worker is under a statutory regime rather than CLT;
+
+-   And "**q1_id**", an indicator for workers earning below two minimum wages in that year.
+
+Whereas for RAIS "estabelecimentos", factor analysis will include:
+
+-   "**quantidade_vinculos_clt**" and "**quantidade_vinculos_estatutarios**", which shows how many people have been hired by a company either under CLT or as a statutory worker;
+
+-   "**indicador_simples**", for companies that are under the "Simples Nacional" tax regime;
+
+-   "**indicador_atividade_ano**", indicating whether the company was active that year;
+
+-   And "**treat_AP**" and "**treat_RP**", to identify companies at regions that were strongly treated by the minimum wage hikes from 2003 to 2010.
+
+And for PNAD, the variables included in PCA will be:
+
+-   "**renda_mensal_ocupacao_principal**", "**renda_mensal_todas_fontes**" and "**renda_aposentadoria_pensao**", meaning income from work, all sources, and from pensions for an individual, respectively;
+
+-   "**idade**", "**anos_estudo**", "**gender_id**" and "**race_id**" as controls for age, education, gender and race, respectively;
+
+-   "**trabalhou_semana**", "**possui_carteira_assinada**" and "**horas_trabalhadas_todos_trabalhos**", which indicates if an individual worked that week, if he is a formal/CLT worker and how many hours he worked at all jobs he had;
+
+-   "**q1_id**";
+
+-   And "**entrep**", indicating whether the individual is an entrepreneur either owning a company, or working on his own.
+
+The number of controls that can be used in each database is quite extensive. For RAIS "vínculos", and the assessment of variables of interest using DiD, these include:
+
+-   "**gender_id**" and "**race_id**";
+
+-   "**educ_id**";
+
+-   "**under_40**", an indicator for workers under 40 years of age;
+
+-   "**tamanho_estabelecimento**";
+
+-   And "**public_work**".
+
+## Results
+
+Henceforth are the results from the econometric analysis utilising both RAIS "vínculos" and "estabelecimentos", as well as PNAD, to assess economic impact of minimum wage growth on Rio de Janeiro APs and RPs between 2000 and 2015.
+
+### AP, RP and "indicador_atividade_ano" inference using PMM-MICE in RAIS "estabelecimentos"
+
+During assessment of descriptive statistics for the RAIS "estabelecimentos" database, it was noticed that there were a number of observations missing for both AP and RP variables, which help determine the strongly and weakly treated regions in this research. To address this issue, the PMM-MICE methodology was applied.
+
+Given recommendations from the academic paper outlining the R package's methodology and implementation [@buuren2011], as well as other sources in the literature [@morris2014; @nooraee2018] , inferences were made by using five imputations per ten iterations of the databases.
+
+As shown in the annex [^19], PMM-MICE kept distribution of AP and RP variables roughly in line with the original.
+
+[^19]: Results can be found in Annex D, subsection [PMM-MICE results in the RAIS "estabelecimentos" database]
+
+One problem with treating RAIS "estabelecimentos" databases was the break in the series during the 2002 year in geographical delimitations, in which there were no observations for neighbourhoods from which AP and RP could be inferred. Attempts at bridging the gap using databases from years after and before the year did not prove fruitful since the years 2000 and 2001 had old neighbourhood codes whose reference could not be found as of August 2022.
+
+For that reason it was decided it was best to proceed with inferring only the years 2003-2015 for RAIS "estabelecimentos" for AP, RP, and also the active company indicator whose series started in 2005. Below are the results for the two years in which values were missing: 2003 and 2014.
+
+```{=tex}
+\begin{table}[H]
+\centering
+\caption{PMM-MICE estimated values for "indicador\_atividade\_ano" in 2003 and 2004}
+\fontsize{9pt}{11pt}\selectfont
+\begin{tabular}{lrr} 
+\toprule
+                      & \textbf{2003} & \textbf{2004}  \\ 
+\cline{2-3}
+\multicolumn{1}{r}{0} & 16.2\%        & 18.6\%         \\
+\multicolumn{1}{r}{1} & 83.8\%        & 81.4\%         \\
+NA                    & 0.0\%         & 0.0\%          \\
+\bottomrule
+\end{tabular}
+\label{table:estabfreqindcativano}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Ministério do Trabalho e Previdência. Own elaboration.}
+\end{table}
+```
+### AP, RP and race inference using PMM-MICE in RAIS "vínculos"
+
+Another noticeable event in the descriptive statistics/analysis stage, was that the race variable from RAIS "vínculos" was missing from data before 2006 in the open repository. Whereas for AP and RP variables, there were also some years where the number of missing entries surpassed 10%, which is above the acceptable values for such in the literature [@dong2013; @madley-dowd2019; @montelpare2020].
+
+PMM-MICE was thus run first on AP and RP to fill missing values in these variables. And as shown in the annex [^20], PMM-MICE kept distribution of AP and RP variables roughly in line with the original.
+
+[^20]: Results can be found in Annex D, subsection [PMM-MICE results in the RAIS "vínculos" database]
+
+As for RAIS "vínculos" pre-2006, datasets of previous years were utilised to infer missing data for the "race_id" variable. Here the PMM-MICE inference showed that Rio de Janeiro's job market was still largely white in racial composition, with the "gap" closing in later years
+
+```{=tex}
+\begin{table}[H]
+\centering
+\caption{Comparison of white/non-white workers (0/1) in the RAIS "vínculos" database (original vs. treated)}
+\fontsize{9pt}{11pt}\selectfont
+\begin{tabular}{rrrrrrrrr} 
+\toprule
+\multicolumn{1}{c}{}   & \multicolumn{1}{c}{\textbf{2000}} & \multicolumn{1}{c}{\textbf{2001}} & \multicolumn{1}{c}{\textbf{2002}} & \multicolumn{1}{c}{\textbf{2003}} & \multicolumn{1}{c}{\textbf{2004}} & \multicolumn{1}{c}{\textbf{2005}} & \multicolumn{1}{c}{\textbf{2006}} & \multicolumn{1}{c}{\textbf{2007}}  \\ 
+\cline{2-9}
+0                      & 60.7\%                            & 60.5\%                            & 60.3\%                            & 60.8\%                            & 60.4\%                            & 60.6\%                            & 13.4\%                            & 14.2\%                             \\
+1                      & 39.3\%                            & 39.5\%                            & 39.7\%                            & 39.2\%                            & 39.6\%                            & 39.4\%                            & 6.0\%                             & 7.7\%                              \\
+\multicolumn{1}{l}{NA} & -100.0\%                          & -100.0\%                          & -100.0\%                          & -100.0\%                          & -100.0\%                          & -100.0\%                          & -19.4\%                           & -21.8\%                            \\
+\multicolumn{1}{l}{}   & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}              & \multicolumn{1}{l}{}               \\
+\multicolumn{1}{c}{}   & \multicolumn{1}{c}{\textbf{2008}} & \multicolumn{1}{c}{\textbf{2009}} & \multicolumn{1}{c}{\textbf{2010}} & \multicolumn{1}{c}{\textbf{2011}} & \multicolumn{1}{c}{\textbf{2012}} & \multicolumn{1}{c}{\textbf{2013}} & \multicolumn{1}{c}{\textbf{2014}} & \multicolumn{1}{c}{\textbf{2015}}  \\ 
+\cline{2-9}
+0                      & 12.1\%                            & 12.5\%                            & 4.2\%                             & 11.2\%                            & 11.1\%                            & 11.0\%                            & 11.1\%                            & 11.3\%                             \\
+1                      & 6.1\%                             & 6.3\%                             & 3.2\%                             & 6.2\%                             & 6.0\%                             & 6.3\%                             & 6.5\%                             & 7.0\%                              \\
+\multicolumn{1}{l}{NA} & -18.2\%                           & -18.8\%                           & -7.4\%                            & -17.4\%                           & -17.1\%                           & -17.3\%                           & -17.6\%                           & -18.3\%                            \\
+\bottomrule
+\end{tabular}
+\label{tab:vincfreqracecomp}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Ministério do Trabalho e Previdência. Own elaboration.}
+\end{table}
+```
+There was, however, one year in the dataset that proved difficult to fill in missing "race_id" entries: 2010. Using alternative methods such as removing collinear variables -- which had already been done with other databases --, and increasing number of imputations and iterations, did not help solve the issue.
+
+### DiD estimates for RAIS "vínculos", 2001 to 2013
+
+The reason for a shorter time frame in this analysis is 1) the fact one of the independent variables being assessed, "indicador_simples", has no entries before 2001; and 2) Brazil's major economic crisis in 2014 from which the country only started recovering in 2017 [@brinca2021; @vartanian2018; @europeancentralbank2016], which could add unwarranted noise to an analysis of minimum wage growth impact -- a policy that took place from 2003 to 2010.
+
+Another thing of note is that since the policy -- and thus the treatment -- takes place over a range of years, it would be problematic to estimate average effect of the treatment on the treated on a static model as is the case in simple DiD estimations. Therefore this research chose a dynamic effect estimation approach, which can also be viewed as an event studies analysis for periods before and beyond the treatment's first impact on Rio de Janeiro's labor market.
+
+As the literature reveals in recent developments [@borusyak2022; @callaway2021; @dechaisemartin2020; @goodman-bacon2021; @sun2021], ordinary least squares estimation of two-way fixed effects (TWFE) DiD models either on static or dynamic forms can be problematic. An alternative, provided by @butts2022 and @borusyak2022 and implemented by @did2s via R package "did2s" is to first estimate fixed effects (and potential regressors) on untreated/not-yet-treated units against the dependent variable, taking its residuals and estimating them against all observations to get group-time average treatment effect(s) [^21].
+
+[^21]: First-stage results can be found in Annex D, subsection [DiD first-stage results - AP & RP level]
+
+Taking the above into consideration, here are the treatment effects results for each of the dependent variables assessed in the research at the AP level [^22], based on second-stage FE estimations of treated units.
+
+[^22]: RP level results can be found in Annex D, subsection [DiD second-stage results - RP level]
+
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Log Average Income (deflated) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & 0.008 & 0.007 & 0.006\\
+ & (0.006) & (0.007) & (0.006)\\
+fixest = rel\_year = 0 & -0.038** & -0.030** & 0.018***\\
+ & (0.006) & (0.005) & (0.002)\\
+fixest = rel\_year = 1 & -0.084 & -0.069 & 0.028***\\
+ & (0.040) & (0.034) & (0.002)\\
+fixest = rel\_year = 2 & -0.047 & -0.036 & 0.048**\\
+ & (0.043) & (0.037) & (0.007)\\
+fixest = rel\_year = 3 & -0.040 & -0.025 & 0.022*\\
+ & (0.045) & (0.038) & (0.007)\\
+fixest = rel\_year = 4 & -0.031 & -0.027 & -0.020*\\
+ & (0.039) & (0.032) & (0.006)\\
+fixest = rel\_year = 5 & -0.046 & -0.040 & -0.003\\
+ & (0.049) & (0.043) & (0.010)\\
+fixest = rel\_year = 6 & -0.018 & -0.008 & 0.029\\
+ & (0.050) & (0.042) & (0.014)\\
+fixest = rel\_year = 7 & 0.088 & 0.064 & 0.043\\
+ & (0.081) & (0.060) & (0.022)\\
+fixest = rel\_year = 8 & -0.010 & -0.007 & 0.037**\\
+ & (0.043) & (0.034) & (0.005)\\
+fixest = rel\_year = 9 & -0.041 & -0.033 & 0.038**\\
+ & (0.046) & (0.036) & (0.005)\\
+fixest = rel\_year = 10 & -0.075 & -0.070 & 0.001\\
+ & (0.047) & (0.036) & (0.008)\\
+\midrule
+Num.Obs. & 33830503 & 33339651 & 33339651\\
+R2 & 0.001 & 0.001 & 0.0006\\
+R2 Adj. & 0.001 & 0.001 & 0.0006\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstageincomeAP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Worker at "Simples Nacional" company (Y/n) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & 0.021*** & 0.021*** & 0.021***\\
+ & (0.001) & (0.001) & (0.0009)\\
+fixest = rel\_year = 0 & 0.057*** & 0.057*** & 0.054***\\
+ & (0.001) & (0.001) & (0.002)\\
+fixest = rel\_year = 1 & 0.071** & 0.070** & 0.057***\\
+ & (0.010) & (0.009) & (0.0007)\\
+fixest = rel\_year = 2 & 0.086*** & 0.086*** & 0.072***\\
+ & (0.010) & (0.010) & (0.004)\\
+fixest = rel\_year = 3 & 0.086** & 0.086** & 0.075***\\
+ & (0.017) & (0.017) & (0.006)\\
+fixest = rel\_year = 4 & 0.086** & 0.087** & 0.079***\\
+ & (0.015) & (0.015) & (0.008)\\
+fixest = rel\_year = 5 & 0.072** & 0.072** & 0.073***\\
+ & (0.014) & (0.014) & (0.004)\\
+fixest = rel\_year = 6 & 0.074+ & 0.075+ & 0.074*\\
+ & (0.028) & (0.028) & (0.019)\\
+fixest = rel\_year = 7 & 0.070 & 0.075+ & 0.085*\\
+ & (0.036) & (0.030) & (0.019)\\
+fixest = rel\_year = 8 & 0.094* & 0.095* & 0.092**\\
+ & (0.022) & (0.022) & (0.012)\\
+fixest = rel\_year = 9 & 0.070** & 0.071** & 0.070***\\
+ & (0.012) & (0.012) & (0.002)\\
+fixest = rel\_year = 10 & 0.070** & 0.071** & 0.067***\\
+ & (0.015) & (0.015) & (0.004)\\
+\midrule
+Num.Obs. & 34334762 & 33842121 & 33842121\\
+R2 & 0.010 & 0.010 & 0.012\\
+R2 Adj. & 0.010 & 0.010 & 0.012\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstagesimplesAP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Worker earning under 2 minimum wages/month (Y/n) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & -0.005+ & -0.005 & -0.005+\\
+ & (0.002) & (0.002) & (0.002)\\
+fixest = rel\_year = 0 & 0.033*** & 0.030*** & 0.013*\\
+ & (0.001) & (0.001) & (0.003)\\
+fixest = rel\_year = 1 & 0.053* & 0.048* & 0.007**\\
+ & (0.018) & (0.016) & (0.001)\\
+fixest = rel\_year = 2 & 0.048+ & 0.045+ & 0.008*\\
+ & (0.019) & (0.017) & (0.002)\\
+fixest = rel\_year = 3 & 0.058+ & 0.053+ & 0.024**\\
+ & (0.023) & (0.021) & (0.005)\\
+fixest = rel\_year = 4 & 0.067* & 0.067* & 0.055**\\
+ & (0.022) & (0.020) & (0.006)\\
+fixest = rel\_year = 5 & 0.065 & 0.064+ & 0.048*\\
+ & (0.031) & (0.029) & (0.013)\\
+fixest = rel\_year = 6 & 0.055 & 0.053 & 0.032\\
+ & (0.034) & (0.031) & (0.017)\\
+fixest = rel\_year = 7 & 0.002 & 0.013 & 0.027\\
+ & (0.054) & (0.038) & (0.019)\\
+fixest = rel\_year = 8 & 0.052 & 0.052 & 0.030+\\
+ & (0.030) & (0.026) & (0.013)\\
+fixest = rel\_year = 9 & 0.072+ & 0.070+ & 0.042*\\
+ & (0.031) & (0.028) & (0.012)\\
+fixest = rel\_year = 10 & 0.082+ & 0.082* & 0.053*\\
+ & (0.032) & (0.029) & (0.015)\\
+\midrule
+Num.Obs. & 34334762 & 33842121 & 33842121\\
+R2 & 0.004 & 0.004 & 0.002\\
+R2 Adj. & 0.004 & 0.004 & 0.002\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstageq1AP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Female worker (Y/n) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & -0.002 & -0.002 & -0.001\\
+ & (0.002) & (0.002) & (0.002)\\
+fixest = rel\_year = 0 & 0.004 & 0.005 & 0.015*\\
+ & (0.004) & (0.004) & (0.005)\\
+fixest = rel\_year = 1 & -0.039 & -0.038 & -0.011\\
+ & (0.021) & (0.020) & (0.009)\\
+fixest = rel\_year = 2 & -0.063* & -0.062* & -0.036*\\
+ & (0.021) & (0.020) & (0.011)\\
+fixest = rel\_year = 3 & -0.057* & -0.055* & -0.033*\\
+ & (0.019) & (0.019) & (0.010)\\
+fixest = rel\_year = 4 & -0.058* & -0.057* & -0.045**\\
+ & (0.018) & (0.017) & (0.009)\\
+fixest = rel\_year = 5 & -0.037* & -0.036* & -0.022*\\
+ & (0.013) & (0.013) & (0.006)\\
+fixest = rel\_year = 6 & -0.060** & -0.058** & -0.038**\\
+ & (0.012) & (0.011) & (0.005)\\
+fixest = rel\_year = 7 & -0.028 & -0.046* & -0.055***\\
+ & (0.035) & (0.016) & (0.005)\\
+fixest = rel\_year = 8 & -0.046* & -0.045* & -0.032*\\
+ & (0.016) & (0.015) & (0.007)\\
+fixest = rel\_year = 9 & -0.033 & -0.032 & -0.019+\\
+ & (0.017) & (0.016) & (0.008)\\
+fixest = rel\_year = 10 & -0.026 & -0.025 & -0.015\\
+ & (0.017) & (0.016) & (0.009)\\
+\midrule
+Num.Obs. & 34334762 & 33842121 & 33842121\\
+R2 & 0.002 & 0.002 & 0.001\\
+R2 Adj. & 0.002 & 0.002 & 0.001\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstagegenderAP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Non-white worker (Y/n) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & 0.0003 & 0.0002 & 0.0006\\
+ & (0.0002) & (0.0003) & (0.0003)\\
+fixest = rel\_year = 0 & 0.015*** & 0.015*** & 0.002*\\
+ & (0.0008) & (0.0009) & (0.0005)\\
+fixest = rel\_year = 1 & 0.025* & 0.021* & -0.002*\\
+ & (0.008) & (0.006) & (0.0005)\\
+fixest = rel\_year = 2 & 0.021* & 0.016* & -0.002+\\
+ & (0.007) & (0.005) & (0.0008)\\
+fixest = rel\_year = 3 & 0.033* & 0.029* & 0.019*\\
+ & (0.011) & (0.010) & (0.006)\\
+fixest = rel\_year = 4 & 0.016 & 0.012 & 0.015\\
+ & (0.014) & (0.012) & (0.008)\\
+fixest = rel\_year = 5 & 0.028+ & 0.026+ & 0.014\\
+ & (0.012) & (0.011) & (0.007)\\
+fixest = rel\_year = 6 & 0.038+ & 0.035 & 0.023\\
+ & (0.018) & (0.017) & (0.012)\\
+fixest = rel\_year = 7 & 0.012 & 0.013 & 0.011\\
+ & (0.025) & (0.024) & (0.017)\\
+fixest = rel\_year = 8 & 0.025 & 0.023 & 0.011\\
+ & (0.023) & (0.021) & (0.017)\\
+fixest = rel\_year = 9 & 0.033 & 0.031 & 0.011\\
+ & (0.024) & (0.022) & (0.017)\\
+fixest = rel\_year = 10 & 0.029 & 0.028 & 0.009\\
+ & (0.023) & (0.022) & (0.018)\\
+\midrule
+Num.Obs. & 33842121 & 33842121 & 33842121\\
+R2 & 0.0007 & 0.0006 & 0.0002\\
+R2 Adj. & 0.0007 & 0.0006 & 0.0002\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstageraceAP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+```{=tex}
+\begin{table}[H]
+
+\caption{Dependent variable: Still at work by end of the year (Y/n) -- second-stage estimation, AP level}
+\centering
+\begin{tabular}[t]{lccc}
+\toprule
+  & Model 1 & Model 2 & Model 3\\
+\midrule
+fixest = rel\_year = -2 & -0.002 & -0.002 & -0.0008\\
+ & (0.001) & (0.001) & (0.001)\\
+fixest = rel\_year = 0 & 0.006* & 0.007* & 0.005**\\
+ & (0.002) & (0.002) & (0.0008)\\
+fixest = rel\_year = 1 & -0.025 & -0.019 & -0.0008\\
+ & (0.015) & (0.012) & (0.0008)\\
+fixest = rel\_year = 2 & -0.027+ & -0.020* & 0.004\\
+ & (0.010) & (0.007) & (0.003)\\
+fixest = rel\_year = 3 & -0.031+ & -0.024+ & -0.001\\
+ & (0.013) & (0.011) & (0.006)\\
+fixest = rel\_year = 4 & -0.027+ & -0.024+ & -0.004\\
+ & (0.011) & (0.009) & \vphantom{1} (0.005)\\
+fixest = rel\_year = 5 & -0.009 & -0.007 & -0.0005\\
+ & (0.011) & (0.009) & (0.005)\\
+fixest = rel\_year = 6 & -0.028*** & -0.025*** & -0.010\\
+ & (0.002) & (0.0008) & (0.010)\\
+fixest = rel\_year = 7 & 0.062* & 0.101*** & 0.062**\\
+ & (0.021) & (0.003) & (0.011)\\
+fixest = rel\_year = 8 & -0.036*** & -0.035*** & -0.019\\
+ & (0.002) & (0.0009) & (0.010)\\
+fixest = rel\_year = 9 & -0.040* & -0.038** & -0.018*\\
+ & (0.010) & (0.007) & (0.004)\\
+fixest = rel\_year = 10 & -0.030* & -0.030** & -0.012+\\
+ & (0.009) & (0.006) & (0.004)\\
+\midrule
+Num.Obs. & 34334762 & 33842121 & 33842121\\
+R2 & 0.002 & 0.003 & 0.001\\
+R2 Adj. & 0.002 & 0.003 & 0.001\\
+\bottomrule
+\multicolumn{4}{l}{\rule{0pt}{1em}Notes: standard errors clustered by AP}\\
+\multicolumn{4}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+
+\label{table:2ndstagevincativAP}
+    
+\vspace{0.1cm}
+    
+\centering \footnotesize{Source: Own elaboration.}
+
+\end{table}
+```
+RP level results and first-stage estimations can be found in the annex.
+
+### PCA for RAIS "vínculos", 2000 to 2015
+
+For PCA analysis in RAIS "vínculos", observations were first filtered by age where workers between 23 and 65 years of age were kept in the dataset -- similar to what had been done in the DiD analysis. Any values carrying NAs were also excluded as a way not to cause issues with running PCA/factor analysis, which still left over 2 million observations for analysis in each year.
+
+Checking for correlation between variables, none of them were over $|0.8|$, which means there were no candidates for exclusion *ex post*. Results from the Kaiser-Meyer-Olkin (KMO) factor adequacy test were $>0.7$ for each year, whereas Bartlett's test for sphericity -- in which the null hypothesis means the data is essentially non-correlated, and thus impossible for any kind of PCA [@gorsuch1973; @kaiser1970] -- had a $p$-value of $0$.
+
+There were three eigenvectors in the dataset with eigenvalues $>1$, which under Kaiser's rule mean the research should stick to three factors for analysis [@kaiser1960]. While parallel analysis [@franklin1995] suggested this could proceed with five factors, it was decided to be best to stick with a conservative number of them.
+
+Although correlation between most variables in the dataset was low, and the assumption of independent factors could be taken from the get-go, promax rotation -- generally used for large databases with highly correlated data -- was first attempted to confirm the suspicion that factors would be independent. Upon confirmation of that fact the process continued with varimax rotation, which is better suited not just for independent factors but also to make them clearer for interpretation [@watkins2018].
+
+These are the results for factor analysis in the RAIS "vínculos" database in 2001 and 2015, using varimax rotation on three factors with "**treat-AP**" as a regional indicator [^23].
+
+[^23]: RP level results and factor loadings from years 2000 to 2015 can be found in Annex D, subsection [PCA results - RAIS "vínculos" from 2000 to 2015]
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition for AP treatment in 2000, in RAIS "vínculos" database}
+\includegraphics[width=1\textwidth]{imgs/051_2000_factor_analysis_AP_vinc.png}
+\label{fig:PCAraisvinc2001AP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition for AP treatment in 2015, in RAIS "vínculos" database}
+\includegraphics[width=1\textwidth]{imgs/052_2015_factor_analysis_AP_vinc.png}
+\label{fig:PCAraisvinc2015AP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+### PCA for RAIS "estabelecimentos", 2003 to 2015
+
+For PCA analysis in RAIS "estabelecimentos", observations were unfiltered. However any values carrying NAs were still excluded. That still left over 200 thousand observations for analysis in each year.
+
+Checking for correlation between variables, none of them were over $|0.8|$. Results from the Kaiser-Meyer-Olkin (KMO) factor adequacy test were $>0.5$ for each year, whereas Bartlett's test for sphericity had a $p$-value of $0$.
+
+There were two eigenvectors in the dataset with eigenvalues $>1$, which under Kaiser's rule mean the research should stick to two factors for analysis. While parallel analysis suggested this could proceed with three factors, it was decided to be best to stick with a conservative number of them -- as done with RAIS "vínculos".
+
+Although correlation between most variables in the dataset was also low in RAIS "estabelecimentos", and the assumption of independent factors could be taken from the get-go, promax rotation was first attempted to confirm the suspicion that factors would be independent. Upon confirmation of that fact the process continued with varimax rotation.
+
+Below are the results for factor analysis in the RAIS "estabelecimentos" database in 2003 and 2015, using varimax rotation on three factors with "**treat-AP**" as a regional indicator [^24].
+
+[^24]: RP level results and factor loadings from years 2003 to 2015 can be found in Annex D, subsection [PCA results - RAIS "estabelecimentos" from 2003 to 2015]
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition for AP treatment in 2003, in RAIS "estabelecimentos" database}
+\includegraphics[width=1\textwidth]{imgs/055_2003_factor_analysis_AP_estab.png}
+\label{fig:PCAraisestab2001AP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition for AP treatment in 2015, in RAIS "estabelecimentos" database}
+\includegraphics[width=1\textwidth]{imgs/056_2015_factor_analysis_AP_estab.png}
+\label{fig:PCAraisestab2015AP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+### PCA for PNAD, 2001 to 2015
+
+For PCA analysis in PNAD "individual", observations were filtered for those over the age of 23, whether they are part of the labour market or not. Any values carrying NAs were also excluded, leaving the research with roughly 10 thousand observations in each year.
+
+Checking for correlation between variables, none of them were over $|0.8|$. Results from the Kaiser-Meyer-Olkin (KMO) factor adequacy test were $>0.5$ for each year, whereas Bartlett's test for sphericity had a $p$-value of $0$.
+
+There were four eigenvectors in the dataset with eigenvalues $>1$, which under Kaiser's rule mean the research should stick to four factors for analysis. While parallel analysis suggested this could proceed with six factors, it was decided to be best to stick with a conservative number of them -- as done with the two previous databases.
+
+Although correlation between most variables in the dataset was low, and the assumption of independent factors could also be taken from the get-go, promax rotation was first attempted to confirm the suspicion that factors would be independent. Upon confirmation of that fact the process continued with varimax rotation.
+
+Below are the results for factor analysis in the PNAD "individual" database in 2001 and 2015, using varimax rotation on four factors [^25].
+
+[^25]: Factor loadings from years 2001 to 2015 can be found in Annex D, subsection [PCA results - PNAD from 2001 to 2015]
+
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition in 2001, in PNAD "individual" database}
+\includegraphics[width=1\textwidth]{imgs/059_2001_factor_analysis_PNAD.png}
+\label{fig:PCApnad2001RP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+```{=tex}
+\vspace{0.1cm}
+\begin{figure}[H]
+\centering
+\caption{Factor decomposition in 2015, in PNAD "individual" database}
+\includegraphics[width=1\textwidth]{imgs/060_2015_factor_analysis_PNAD.png}
+\label{fig:PCApnad2015RP}
+
+\vspace{0.1cm}
+
+\centering \footnotesize{Source: Own elaboration.}
+\end{figure}
+```
+### Discussion
+
+\vspace{0.1cm}
+
+**DiD results for RAIS "vínculos"**
+
+\vspace{0.1cm}
+
+Under the complete model (no.3 in the regression tables above), estimations of the treatment effect at AP and RP levels do not differ much either in signal or in estimated impact. In total there were over 33 million observations assessed to gauge whether/how minimum wage growth impacted workers in earnings, and employment status.
+
+The results for earnings are not as strong as in the literature for earnings, as the differential uptick for treated units during treatment was up to 4.9% in 2005 under the full model which accounts for race, gender, age, education, working status (CLT vs. statutory) and company size in the first-stage estimation. Despite a 2% loss of income in 2007, treated units maintained at least 2% gains in earnings two years after treatment, to a total of approximately 27% growth in real income in comparison to non-treated units if they were still working at strongly treated areas over an 11-year span.
+
+First-stage estimation of average income takes an interesting turn between model no.1, assessing only racial, gender and age components; and the complete model, no. 2. Non-white and female workers take 32.8% and 14.8% "hits" to their income in comparison to white and male workers, respectively, when only age is estimated alongside then. But once we control for public work, education and firm size, the racial component negative impact is reduced to 11.5%, and the gender component increases to 30.3%.
+
+Perhaps more noticeable is the increase in employment of workers in "Simples Nacional" companies -- i.e, small and medium businesses -- in strongly treated regions. From 2003 to 2013 the likelihood of being a worker at such a company at a strongly treated AP region is 5.4% to 9.2% higher than in weakly treated ones. This is in tune with absolute growth in "Simples Nacional" companies specially, as seen in the descriptive analysis section of this thesis and also in PCA/FA.
+
+Unsurprisingly, the number of workers earning under 2 minimum wages also grew in strongly treated regions. It is not a surprising development given the "Simples Nacional" assessment above, as well as first-stage estimate results that reveal how race, gender and age are strong determinants of being at this income level in Rio's labour market.
+
+Another interesting result is how treatment impacted employment of women and non-white workers in strongly treated regions. Whereas the effect on non-white members of the labour force was largely insignificant outside of a 1.9% uptick in hiring in 2006, in comparison to those in weakly treated regions, presence of female workers decreased by up to 5.5% during the years assessed.
+
+Here first-stage estimations are also revealing as female workers are more likely to be found in public work under statutory regimes, with high returns on education and positive impacts across all types of firm size. That is not the case for non-white workers, with firm size playing little to impact in their hiring up until the higher echelon of companies, which hire 1,000+ workers.
+
+Finally, the treatment had no significant impact on workers' ability to maintain themselves at a company by the end of the year. First-stage estimation gives a similar picture, where the bigger the firm the likeliest for a worker to stay at their job.
+
+\vspace{0.1cm}
+
+**PCA/FA for RAIS "vínculos"**
+
+\vspace{0.1cm}
+
+Three years before treatment began, RAIS "vínculos" has the first and foremost factor -- Rio's labour market "health" -- largely influenced by the public sector. That is not a surprise, given how influential it has been in Rio de Janeiro's economy since Brazil's years as a Portuguese colony. Nor is it surprising that public workers are hired by the largest "companies" in the city, the city and state governments, all while working fewer hours than private sector counterparts and having more job security to boot. And since AP 1 - Centro is where these jobs are officially located, it is no wonder "**treat_AP**" and "**treat_RP**" enter the first RAIS "vínculos" factor as a negative contributor.
+
+The second most influential factor in the database back in 2000 can be interpreted as the importance of returns to education to a worker, especially when it comes to employment. Interestingly being a non-white workers leads not just to being less educated than white counterparts but also to earning fewer income in Rio's labour market. Whereas women in Rio's labour market get higher returns to education in comparison to male counterparts in hiring likelihood as also seen in DiD estimation, although this is likely helped by their below-40% presence in it.
+
+The third and last factor in 2000 is in itself an indicator of job longevity, another important determinant of wages in Rio's labour market given public worker's influence in the city's labour market state. The older you are, the longer you are employed, and the more likely it is that you are not one of the people earning fewer than two minumum wages per month on average in the city -- these are younger folks usually entering firms outside of weakly treated areas in Rio de Janeiro.
+
+Fifteen years later, in 2015, time at employment -- which has diminished on average in the city, as shown by the descriptive analysis -- "jumps" to become the largest contributor to Rio de Janeiro's labour market "health" alongside public workers and age. This could be an effect of the aforementioned economic crisis that hit Brazil in 2014, with private workers suffering the most with unemployment and lost income. "**treat_AP**" remains a negative contributor since strongly treated regions largely employ younger workers in small enterprises, whose job security is also frailer in comparison to other regions in the city.
+
+The second factor in 2015 remains as a measure of returns to education in the city, although with income overtaking employment likelihood. There is little change when it comes to race affecting both employment and income. In the meantime, those earning fewer that two minimum wages on average per month become a more influential slice of Rio's labour market during an economic crisis throughout the country.
+
+Once a component of job longevity, now the third factor in Rio de Janeiro's labour market in 2015 is more related to hours worked -- something that can also be seen as linked to public workers. Same is the case with women being more likely to enter contracts with fewer than 44 hours per week, which is the norm for statutory workers, given how they are more likely to be employed under such a regime as per DiD analysis.
+
+There is an interesting difference in the analysis at the RP-level for Rio de Janeiro in the year 2015, which is "**treat_RP**" contributing negatively to the income/educational factor in the analysis. Everywhere else it stays the same, although with some differences in "weights" of each variable's contribution to the estimated factors.
+
+\vspace{0.1cm}
+
+**PCA/FA for RAIS "estabelecimentos"**
+
+\vspace{0.1cm}
+
+The low number of variables for PCA lead to a diminished number of factors. But that does not mean they are not as important as in other databases, especially when looking at "**treat_AP**" and "**treat_RP**" influences.
+
+First year in the analysis, 2003, has the first factor as employment numbers in the city. As expected the largest contributor are CLT workers, with statutory ones being roughly 1/5th of them in terms of weight in the aforementioned factor.
+
+The interesting picture is within the second factor, which could be interpreted as an entrepreneurial measure with "**indicador_simples**" -- as in, SME under the "Simples Nacional" tax regime -- as the largest contributor. What is quite telling is that both geographical indicators enter this factor positively in 2003, as well as "**indicador_atividade_ano**".
+
+Then in 2015, the picture flips with the aforementioned entrepreneurial measure overtaking its employment counterpart. In the latter statutory workers become a much weaker contributor, which is on par with the diminishing number of employees under the statutory regime as years go by in the city's labour market.
+
+\vspace{0.1cm}
+
+**PCA/FA for PNAD**
+
+\vspace{0.1cm}
+
+Since PNAD also captures non-workers -- either those still studying, or those removed from the labour force due to age/retirement, accidents and other factors that lead them to becoming pensionists -- it is a very useful survey to capture the entire Rio de Janeiro's metropolitan area economic outlook. While it has the disadvantage of not having AP/RP geographical definitions, nor a city-wide one, it can still be a way to show how the region evolved over the years in this analysis.
+
+For that matter, PCA in 2001 for PNAD shows how labour market participants are the largest contributors to Rio de Janeiro's economy. That is especially true to those under CLT, who also work more often than their "informal" counterparts who are more often than not under "piecemeal" working regimes.
+
+Two interesting things of note in the first PNAD factor in 2001 are age as a negative contributor, and gender as well. The latter can be understood as an effect of the gender pay gap [@morello2021], whereas the latter is likely due to the aforementioned pensionists who have been out of the labour market due to retirement.
+
+As is the case with RAIS "vínculos", income returns to education for year 2001 are somewhat strong in Rio's metropolitan area. Here both "**q1_id**" and race are negative contributors.
+
+The last two factors in 2001 analysis are also quite interesting. The third factor is income from pensions, which is an important component of demand at the regional level. There are many families in Brazil, and also in Rio, whose main income source are pensions from their older members [@pamplona2019]. PCA shows that they are a stronger contributor than entrepreneurs, which are those either working by themselves as freelancers/liberal professionals, or employers.
+
+In 2015 the scenario undergoes a few changes. While people in the labour market remain the largest contributor to Rio's economy, years of studying and gender enter the first factor as positive and negative contributors to labour market participation, respectively. The income factor is now only negatively affected by "**q1_id**" and race, whereas the picture for pensionists' and entrepreneurs' contributions to the city's economy remain the same even in "loading" terms.
+
+\newpage
