@@ -1,1 +1,1 @@
-My thesis work, all done in R.
+My thesis assessed the effects of minumum wage hikes in Brazil at the federal level during the 2000-2013 period, and how it affected Rio de Janeiro's labour market and economic activity. It utilizes predictive mean matching combined with multivariate imputation by chained equation methods to fill in essential missing data, with the aforementioned effects assessed via difference-in-differences estimation and principal component analysis. The work was all done in R, with the thesis being written in RMarkdown and LaTeX.
